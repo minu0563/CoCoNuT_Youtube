@@ -1,0 +1,215 @@
+:root {
+  --bg: #e0e0e0;
+  --text: #0c0b09;
+  --muted: #5c5c5c;
+  --card: #d5d5d5;
+  --border: #c0c0c0;
+  --accent: #2563eb;
+  --accent-press: #1d4ed8;
+  --shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --card: #262626;
+  --border: #3a3a3a;
+  --accent: #60a5fa;
+  --accent-press: #3b82f6;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Noto Sans KR, "Apple SD Gothic Neo", "Noto Sans", "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  width: 360px;
+  min-height: 480px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+.brand .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.title {
+  font-size: 14px;
+  opacity: .9;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 6px 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  user-select: none;
+}
+
+.theme-toggle span {
+  font-size: 12px;
+  opacity: .85;
+}
+
+.container {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.help {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.select {
+  width: 140px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  letter-spacing: .2px;
+  transition: transform .15s ease, background .2s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+  background: var(--accent-press);
+}
+
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  background: var(--border);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background .2s ease;
+  border: 1px solid var(--border);
+}
+
+.switch input {
+  display: none;
+}
+
+.switch .knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  transition: left .2s ease;
+}
+
+.switch input:checked+.knob {
+  left: 20px;
+}
+
+.switch.active {
+  background: var(--accent);
+}
+
+.status {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.footer {
+  padding: 10px 14px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.menu-btn {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.theme-toggle.floating {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

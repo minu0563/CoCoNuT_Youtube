@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Setting</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="brand">
+      <div>
+        <div class="title" id="mainTitle">YouTube Setting</div>
+      </div>
+    </div>
+    <a href="setting.html" class="menu-btn">
+      <img id="themeIcon" src="../white.png" alt="menu"
+        style="width:20px;height:20px;vertical-align:middle;margin-left:6px;">
+    </a>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <div class="row">
+        <div>
+          <div class="label" id="qualityLabel">화질 고정</div>
+          <div class="help" id="qualityHelp">동영상 시작 시 자동으로 설정</div>
+        </div>
+        <select id="qualitySelect" class="select">
+          <option value="auto">Auto</option>
+          <option value="2160p">2160p (4K)</option>
+          <option value="1440p">1440p (QHD)</option>
+          <option value="1080p">1080p</option>
+          <option value="720p">720p</option>
+          <option value="480p">480p</option>
+          <option value="360p">360p</option>
+          <option value="240p">240p</option>
+          <option value="144p">144p</option>
+        </select>
+      </div>
+      <div id="qualityStatus" class="status">화질: Auto</div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <div>
+          <div class="label">PiP 모드</div>
+          <div class="help">현재 탭의 동영상을 화면 밖에서도 보기</div>
+        </div>
+        <button id="pipBtn" class="btn">PiP 실행</button>
+      </div>
+      <div id="pipStatus" class="status">PiP: 감지 대기</div>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <div>
+          <div class="label">쇼츠 자동 넘김</div>
+          <div class="help">shorts 페이지에서 자동으로 다음 영상</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="shortAuto">
+          <span class="knob"></span>
+        </label>
+      </div>
+      <div id="shortStatus" class="status">쇼츠 자동넘김: 꺼짐</div>
+    </section>
+
+
+    <div class="footer" id="footerText">설정은 자동 저장됩니다.</div>
+  </main>
+
+  <button id="themeToggle" class="theme-toggle floating" aria-label="테마 전환">
+    <span id="themeLabel">Light</span>
+  </button>
+
+  <script src="../js/index.js"></script>
+</body>
+
+</html>

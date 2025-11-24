@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>설정</title>
+  <link rel="stylesheet" href="../css/setting.css" />
+</head>
+
+<body>
+  <div class="settings-container">
+    <header class="settings-header">
+      <h1 id="title">설정</h1>
+      <button id="backButton" class="icon-button">←</button>
+    </header>
+
+    <main class="settings-main">
+      <div class="setting-item">
+        <label for="languageSelect" id="languageLabel">언어 선택</label>
+        <select id="languageSelect" class="select">
+          <option value="ko">한국어</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="zh">中文</option>
+        </select>
+      </div>
+
+      <button id="saveButton" class="save-btn" id="saveBtn">저장</button>
+    </main>
+  </div>
+
+  <script src="../js/setting.js"></script>
+</body>
+
+</html>

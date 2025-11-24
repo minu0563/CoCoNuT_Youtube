@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "CoCoNuT: 당신의 편리한 유튜브 시청을 위한 기능 모음집",
+  "version": "3.0.1",
+  "permissions": [
+    "commands",
+    "storage",
+    "activeTab",
+    "scripting",
+    "tabs",
+    "windows"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://www.youtube.com/shorts/*"
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://www.youtube.com/shorts/*"
+      ],
+      "js": [
+        "js/content.js",
+        "js/short.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "do-something": {
+      "suggested_key": {
+        "default": "Ctrl+Q"
+      },
+      "description": "pip"
+    }
+  },
+  "action": {
+    "default_popup": "html/index.html",
+    "default_title": "YouTube 화질 설정"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "html/popup.html",
+        "html/colorPicker.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
