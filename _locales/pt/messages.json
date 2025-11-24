@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "Definições do YouTube" },
+  "qualityLabel": { "message": "Qualidade fixa" },
+  "qualityHelp": { "message": "Definida automaticamente no início do vídeo" },
+  "pipLabel": { "message": "Modo PiP" },
+  "pipHelp": { "message": "Ver vídeo fora do separador atual" },
+  "pipBtn": { "message": "Iniciar PiP" },
+  "pipStatus": { "message": "PiP: A aguardar" },
+  "shortLabel": { "message": "Saltos automáticos dos Shorts" },
+  "shortHelp": { "message": "Ir automaticamente para o próximo vídeo\nna página de Shorts" },
+  "shortStatus": { "message": "Salto automático: Desligado" },
+  "footerText": { "message": "As definições são guardadas\nautomaticamente." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: Ferramentas convenientes para YouTube" },
+  "defaultTitle": { "message": "Configurações de qualidade do YouTube" }
+}

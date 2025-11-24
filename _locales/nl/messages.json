@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "YouTube-instellingen" },
+  "qualityLabel": { "message": "Kwaliteit vergrendelen" },
+  "qualityHelp": { "message": "Automatisch ingesteld bij video start" },
+  "pipLabel": { "message": "PiP-modus" },
+  "pipHelp": { "message": "Bekijk video buiten het huidige tabblad" },
+  "pipBtn": { "message": "Start PiP" },
+  "pipStatus": { "message": "PiP: Wacht" },
+  "shortLabel": { "message": "Shorts automatisch overslaan" },
+  "shortHelp": { "message": "Ga automatisch naar de volgende video\nop de Shorts-pagina" },
+  "shortStatus": { "message": "Automatisch overslaan: Uit" },
+  "footerText": { "message": "Instellingen worden\nautomatisch opgeslagen." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: Handige functies voor YouTube" },
+  "defaultTitle": { "message": "YouTube Kwaliteitsinstellingen" }
+}

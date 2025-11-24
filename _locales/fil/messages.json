@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "Mga Setting ng YouTube" },
+  "qualityLabel": { "message": "I-lock ang kalidad" },
+  "qualityHelp": { "message": "Awtomatikong naka-set sa pagsisimula ng video" },
+  "pipLabel": { "message": "PiP Mode" },
+  "pipHelp": { "message": "Panoorin ang video sa labas ng kasalukuyang tab" },
+  "pipBtn": { "message": "Simulan ang PiP" },
+  "pipStatus": { "message": "PiP: Naghihintay" },
+  "shortLabel": { "message": "Awtomatikong laktawan ang Shorts" },
+  "shortHelp": { "message": "Awtomatikong pumunta sa susunod na video\nsa page ng Shorts" },
+  "shortStatus": { "message": "Awtomatikong laktaw: Patay" },
+  "footerText": { "message": "Awtomatikong nasasave\nang mga setting." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: Mga Maginhawang Tool para sa Panonood ng YouTube" },
+  "defaultTitle": { "message": "YouTube Quality Settings" }
+}

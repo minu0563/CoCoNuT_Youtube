@@ -1,0 +1,28 @@
+{
+  "mainTitle": { "message": "YouTube 설정" },
+  "qualityLabel": { "message": "화질 고정" },
+  "qualityHelp": { "message": "동영상 시작 시 자동으로 설정" },
+  "pipLabel": { "message": "PiP 모드" },
+  "pipHelp": { "message": "현재 탭의 동영상을 화면 밖에서도 보기" },
+  "pipBtn": { "message": "PiP 실행" },
+  "pipStatus": { "message": "PiP: 감지 대기" },
+  "shortLabel": { "message": "쇼츠 자동 넘김" },
+  "shortHelp": { "message": "shorts 페이지에서 자동으로 다음 영상으로\n넘어갑니다." },
+  "shortStatus": { "message": "쇼츠 자동넘김: 꺼짐" },
+  "footerText": { "message": "설정은 자동 저장됩니다." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: 당신의 편리한 유튜브 시청을 위한 기능 모음집" },
+  "defaultTitle": { "message": "YouTube 화질 설정" },
+  
+  "current_quality_display": { "message": "현재 재생 화질: $1" },
+  "quality_not_detected": { "message": "현재 화질 감지 불가" },
+  "detection_failed": { "message": "화질 감지 실패" },
+  "player_loading_error": { "message": "플레이어 로딩 중이거나 오류 발생" },
+  "detection_error": { "message": "화질 감지 오류" },
+  "loading_text": { "message": "로딩 중..." },
+  "loading_available_qualities": { "message": "화질 목록 로드 중..." },
+  "no_available_qualities": { "message": "사용 가능한 화질 없음" },
+  "open_youtube_page": { "message": "YouTube 영상 페이지를 열어주세요." },
+  "page_error": { "message": "페이지 오류" }
+}

@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "YouTube设置" },
+  "qualityLabel": { "message": "画质固定" },
+  "qualityHelp": { "message": "视频开始时自动设置" },
+  "pipLabel": { "message": "PiP模式" },
+  "pipHelp": { "message": "在当前标签页外观看视频" },
+  "pipBtn": { "message": "启动PiP" },
+  "pipStatus": { "message": "PiP: 等待中" },
+  "shortLabel": { "message": "短视频自动跳过" },
+  "shortHelp": { "message": "在 Shorts 页面自动跳到下一个视频" },
+  "shortStatus": { "message": "自动跳过: 关闭" },
+  "footerText": { "message": "设置会自动保存。" },
+  "darkLabel": { "message": "深色" },
+  "lightLabel": { "message": "浅色" },
+  "extensionName": { "message": "CoCoNuT：方便的YouTube观看功能集合" },
+  "defaultTitle": { "message": "YouTube画质设置" }
+}

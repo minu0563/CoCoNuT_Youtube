@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "Pengaturan YouTube" },
+  "qualityLabel": { "message": "Kualitas Tetap" },
+  "qualityHelp": { "message": "Disetel otomatis saat video mulai" },
+  "pipLabel": { "message": "Mode PiP" },
+  "pipHelp": { "message": "Menonton video di luar tab saat ini" },
+  "pipBtn": { "message": "Mulai PiP" },
+  "pipStatus": { "message": "PiP: Menunggu" },
+  "shortLabel": { "message": "Lewati Shorts otomatis" },
+  "shortHelp": { "message": "Secara otomatis pergi ke video berikutnya\ndi halaman Shorts" },
+  "shortStatus": { "message": "Lewati otomatis: Mati" },
+  "footerText": { "message": "Pengaturan tersimpan otomatis." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: Alat Praktis untuk Menonton YouTube" },
+  "defaultTitle": { "message": "Pengaturan Kualitas YouTube" }
+}

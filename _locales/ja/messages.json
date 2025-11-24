@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "YouTube設定" },
+  "qualityLabel": { "message": "画質固定" },
+  "qualityHelp": { "message": "動画開始時に自動設定" },
+  "pipLabel": { "message": "PiPモード" },
+  "pipHelp": { "message": "現在のタブの動画を画面外でも見る" },
+  "pipBtn": { "message": "PiP開始" },
+  "pipStatus": { "message": "PiP: 待機中" },
+  "shortLabel": { "message": "ショーツ自動スキップ" },
+  "shortHelp": { "message": "ショーツページで次の動画に自動移動" },
+  "shortStatus": { "message": "自動スキップ: オフ" },
+  "footerText": { "message": "設定は自動保存されます。" },
+  "darkLabel": { "message": "ダーク" },
+  "lightLabel": { "message": "ライト" },
+  "extensionName": { "message": "CoCoNuT: 便利なYouTube視聴機能集" },
+  "defaultTitle": { "message": "YouTube画質設定" }
+}

@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "Настройки YouTube" },
+  "qualityLabel": { "message": "Фиксировать качество" },
+  "qualityHelp": { "message": "Автоматически при запуске видео" },
+  "pipLabel": { "message": "Режим PiP" },
+  "pipHelp": { "message": "Смотреть видео вне текущей вкладки" },
+  "pipBtn": { "message": "Запустить PiP" },
+  "pipStatus": { "message": "PiP: Ожидание" },
+  "shortLabel": { "message": "Автопропуск Shorts" },
+  "shortHelp": { "message": "Автоматически переходить к следующему\nвидео на странице Shorts" },
+  "shortStatus": { "message": "Автопропуск: Выключен" },
+  "footerText": { "message": "Настройки сохраняются\nавтоматически." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: Удобные функции для просмотра YouTube" },
+  "defaultTitle": { "message": "Настройки качества YouTube" }
+}

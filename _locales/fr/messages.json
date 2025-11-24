@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "Paramètres YouTube" },
+  "qualityLabel": { "message": "Qualité verrouillée" },
+  "qualityHelp": { "message": "Définie automatiquement au début de la vidéo" },
+  "pipLabel": { "message": "Mode PiP" },
+  "pipHelp": { "message": "Regarder la vidéo hors de l'onglet actuel" },
+  "pipBtn": { "message": "Démarrer PiP" },
+  "pipStatus": { "message": "PiP : En attente" },
+  "shortLabel": { "message": "Sauts automatiques des Shorts" },
+  "shortHelp": { "message": "Passer automatiquement à la prochaine vidéo\nsur la page Shorts" },
+  "shortStatus": { "message": "Saut automatique : Désactivé" },
+  "footerText": { "message": "Les paramètres sont\nenregistrés automatiquement." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT : Ensemble d’outils pratiques pour YouTube" },
+  "defaultTitle": { "message": "Paramètres de qualité YouTube" }
+}

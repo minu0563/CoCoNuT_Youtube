@@ -1,0 +1,17 @@
+{
+  "mainTitle": { "message": "YouTube-Einstellungen" },
+  "qualityLabel": { "message": "Qualität sperren" },
+  "qualityHelp": { "message": "Automatisch beim Video-Start eingestellt" },
+  "pipLabel": { "message": "PiP-Modus" },
+  "pipHelp": { "message": "Video außerhalb des aktuellen Tabs ansehen" },
+  "pipBtn": { "message": "PiP starten" },
+  "pipStatus": { "message": "PiP: Wartet" },
+  "shortLabel": { "message": "Shorts automatisch überspringen" },
+  "shortHelp": { "message": "Auf der Shorts-Seite automatisch zum\nnächsten Video wechseln." },
+  "shortStatus": { "message": "Automatisch überspringen: Aus" },
+  "footerText": { "message": "Einstellungen werden\nautomatisch gespeichert." },
+  "darkLabel": { "message": "Dark" },
+  "lightLabel": { "message": "Light" },
+  "extensionName": { "message": "CoCoNuT: Praktische Funktionen für YouTube" },
+  "defaultTitle": { "message": "YouTube Videoqualität einstellen" }
+}
