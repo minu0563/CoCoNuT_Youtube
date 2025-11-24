@@ -12,7 +12,7 @@
   <header class="header">
     <div class="brand">
       <div>
-        <div class="title" id="mainTitle">YouTube Setting</div>
+        <div class="title" id="mainTitle"></div>
       </div>
     </div>
     <a href="setting.html" class="menu-btn">
@@ -26,58 +26,50 @@
     <section class="card">
       <div class="row">
         <div>
-          <div class="label" id="qualityLabel">화질 고정</div>
-          <div class="help" id="qualityHelp">동영상 시작 시 자동으로 설정</div>
+          <div class="label" id="qualityLabel"></div>
+          <div class="help" id="qualityHelp"></div>
         </div>
         <select id="qualitySelect" class="select">
-          <option value="auto">Auto</option>
-          <option value="2160p">2160p (4K)</option>
-          <option value="1440p">1440p (QHD)</option>
-          <option value="1080p">1080p</option>
-          <option value="720p">720p</option>
-          <option value="480p">480p</option>
-          <option value="360p">360p</option>
-          <option value="240p">240p</option>
-          <option value="144p">144p</option>
+          <option value="" disabled selected>화질 감지 중...</option>
         </select>
       </div>
-      <div id="qualityStatus" class="status">화질: Auto</div>
+      <div id="detectedQuality" class="status"></div>
     </section>
 
     <section class="card">
       <div class="row">
         <div>
-          <div class="label">PiP 모드</div>
-          <div class="help">현재 탭의 동영상을 화면 밖에서도 보기</div>
+          <div class="label" id="pipLabel"></div>
+          <div class="help" id="pipHelp"></div>
         </div>
-        <button id="pipBtn" class="btn">PiP 실행</button>
+        <button id="pipBtn" class="btn"></button>
       </div>
-      <div id="pipStatus" class="status">PiP: 감지 대기</div>
+      <div id="pipStatus" class="status"></div>
     </section>
 
     <section class="card">
       <div class="row">
         <div>
-          <div class="label">쇼츠 자동 넘김</div>
-          <div class="help">shorts 페이지에서 자동으로 다음 영상</div>
+          <div class="label" id="shortLabel"></div>
+          <div class="help" id="shortHelp"></div>
         </div>
         <label class="switch">
           <input type="checkbox" id="shortAuto">
           <span class="knob"></span>
         </label>
       </div>
-      <div id="shortStatus" class="status">쇼츠 자동넘김: 꺼짐</div>
+      <div id="shortStatus" class="status"></div>
     </section>
 
-
-    <div class="footer" id="footerText">설정은 자동 저장됩니다.</div>
+    <div class="footer" id="footerText"></div>
   </main>
 
   <button id="themeToggle" class="theme-toggle floating" aria-label="테마 전환">
-    <span id="themeLabel">Light</span>
+    <span id="themeLabel"></span>
   </button>
 
   <script src="../js/index.js"></script>
+  <script src="../js/popup.js"></script>
 </body>
 
 </html>

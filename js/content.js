@@ -1,45 +1,62 @@
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === "setQuality") {
-    const quality = request.quality;
+function getPlayerResponse() {
+  return window.ytInitialPlayerResponse || window.ytplayer?.config?.args?.player_response;
+}
 
-    const qualityMap = {
-      "144p": "tiny",
-      "240p": "small",
-      "360p": "medium",
-      "480p": "large",
-      "720p": "hd720",
-      "1080p": "hd1080",
-      "1440p": "hd1440",
-      "2160p": "hd2160",
-      "4320p": "hd4320"
-    };
+function getAvailableQualities() {
+  let response = getPlayerResponse();
+  if (!response) return [];
+  if (typeof response === 'string') response = JSON.parse(response);
+  const streamingData = response?.streamingData;
+  if (!streamingData) return [];
+  const formats = (streamingData.formats || []).concat(streamingData.adaptiveFormats || []);
+  
+  const qualities = [...new Set(formats.map(f => f.qualityLabel).filter(Boolean))];
 
-    const internalQuality = qualityMap[quality] || quality;
+  const hasAuto = qualities.some(q => q.toLowerCase() === 'auto' || q.includes('자동'));
+  if (!hasAuto) {
+    qualities.unshift('Auto');
+  }
 
-    const trySetQuality = () => {
-      const ytPlayer = document.getElementById("movie_player");
+  return qualities;
+}
 
-      if (
-        ytPlayer &&
-        typeof ytPlayer.setPlaybackQuality === "function" &&
-        ytPlayer.getAvailableQualityLevels
-      ) {
-        const levels = ytPlayer.getAvailableQualityLevels();
-        console.log("🎞️ 사용 가능한 화질:", levels);
+function getCurrentPlaybackQuality() {
+  const videoElement = document.querySelector('video.html5-main-video');
+  if (videoElement && videoElement.videoHeight) {
+    return `${videoElement.videoHeight}p`;
+  }
 
-        if (levels.includes(internalQuality)) {
-          ytPlayer.setPlaybackQuality(internalQuality);
-          ytPlayer.setPlaybackQualityRange?.(internalQuality);
-          console.log(`✅ 화질 설정됨: ${quality} (${internalQuality})`);
-        } else {
-          console.warn(`⚠️ ${quality} (${internalQuality}) 화질은 현재 영상에서 사용 불가`);
-        }
-      } else {
-        console.log("⏳ 플레이어가 아직 로드되지 않음, 재시도...");
-        setTimeout(trySetQuality, 500);
+  const qualityTextElement = document.querySelector('.ytp-menuitem[aria-checked="true"] .ytp-menuitem-label');
+  if (qualityTextElement && qualityTextElement.textContent.includes('p')) {
+    const match = qualityTextElement.textContent.match(/(\d+p)/);
+    if (match) {
+      return match[1];
+    }
+  }
+
+  return null;
+}
+
+
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg.type === 'GET_QUALITIES') {
+    (async () => {
+      let qualities = getAvailableQualities();
+      let retries = 0;
+      const MAX_RETRIES = 5;
+      const DELAY_MS = 200;
+
+      while (qualities.length === 0 && retries < MAX_RETRIES) {
+        retries++;
+        await new Promise(resolve => setTimeout(resolve, DELAY_MS));
+        qualities = getAvailableQualities();
       }
-    };
-
-    trySetQuality();
+      
+      sendResponse({ 
+        availableQualities: qualities,
+        currentQuality: getCurrentPlaybackQuality()
+      });
+    })();
+    return true;
   }
 });
