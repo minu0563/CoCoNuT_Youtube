@@ -342,3 +342,31 @@ select {
   cursor: pointer;
   font-weight: bold;
 }
+
+#goshortcut {
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: black;
+	text-decoration: underline;
+	text-decoration-color: black;
+	text-underline-offset: 4px;
+}
+
+#shortlink {
+	text-decoration-line: none;
+}
+
+[data-theme="dark"] #goshortcut {
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: rgb(255, 255, 255);
+	text-decoration: underline;
+	text-decoration-color: rgb(255, 255, 255);
+	text-underline-offset: 4px;
+}
