@@ -13,5 +13,26 @@
   "darkLabel": { "message": "ダーク" },
   "lightLabel": { "message": "ライト" },
   "extensionName": { "message": "CoCoNuT: 便利なYouTube視聴機能集" },
-  "defaultTitle": { "message": "YouTube画質設定" }
+  "defaultTitle": { "message": "YouTube画質設定" },
+  "current_quality_display": { "message": "現在の再生画質: $1" },
+  "quality_not_detected": { "message": "現在の画質を検出できません" },
+  "detection_failed": { "message": "画質の検出に失敗しました" },
+  "player_loading_error": { "message": "プレーヤーを読み込み中、またはエラーが発生しました" },
+  "detection_error": { "message": "画質検出エラー" },
+  "loading_text": { "message": "読み込み中..." },
+  "loading_available_qualities": { "message": "利用可能な画質を読み込み中..." },
+  "no_available_qualities": { "message": "利用可能な画質はありません" },
+  "open_youtube_page": { "message": "YouTubeの動画ページを開いてください。" },
+  "page_error": { "message": "ページエラー" },
+    "short_on": { "message": "ショーツ自動スキップ: ON" },
+  "short_off": { "message": "ショーツ自動スキップ: OFF" },
+  "pipmasage": { "message": "PIPモードを開始しました" },
+  "pipmagase2": { "message": "動画が検出されませんでした" },
+  "settingtitle": { "message": "拡張機能の設定" },
+  "goshortcut": { "message": "ショートカット設定を確認" },
+  "shortcut1": { "message": "PiPモードショートカット" },
+  "shortcut2": { "message": "(PiPモード) 10秒戻る" },
+  "shortcut3": { "message": "(PiPモード) 10秒進む" },
+  "short_enabled": { "message": "この機能を快適に利用するには、Google にログインする必要があります。" }
+
 }

@@ -13,5 +13,26 @@
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT : Ensemble d’outils pratiques pour YouTube" },
-  "defaultTitle": { "message": "Paramètres de qualité YouTube" }
+  "defaultTitle": { "message": "Paramètres de qualité YouTube" },
+    "current_quality_display": { "message": "Qualité de lecture actuelle : $1" },
+  "quality_not_detected": { "message": "Qualité actuelle non détectée" },
+  "detection_failed": { "message": "Échec de la détection de qualité" },
+  "player_loading_error": { "message": "Le lecteur se charge ou une erreur est survenue" },
+  "detection_error": { "message": "Erreur de détection de qualité" },
+  "loading_text": { "message": "Chargement..." },
+  "loading_available_qualities": { "message": "Chargement des qualités disponibles..." },
+  "no_available_qualities": { "message": "Aucune qualité disponible" },
+  "open_youtube_page": { "message": "Veuillez ouvrir une page vidéo YouTube." },
+  "page_error": { "message": "Erreur de page" },
+    "short_on": { "message": "Auto-saut des Shorts : Activé" },
+  "short_off": { "message": "Auto-saut des Shorts : Désactivé" },
+  "pipmasage": { "message": "Mode PiP activé" },
+  "pipmagase2": { "message": "Vidéo non détectée" },
+  "settingtitle": { "message": "Paramètres de l'extension" },
+  "goshortcut": { "message": "Vérifier les raccourcis" },
+  "shortcut1": { "message": "Raccourci mode PiP" },
+  "shortcut2": { "message": "(Mode PiP) Reculer de 10 secondes" },
+  "shortcut3": { "message": "(Mode PiP) Avancer de 10 secondes" },
+  "short_enabled": { "message": "Vous devez vous connecter avec Google pour utiliser cette fonctionnalité correctement." }
+
 }

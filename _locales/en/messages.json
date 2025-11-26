@@ -23,5 +23,15 @@
   "loading_available_qualities": { "message": "Loading Available Qualities..." },
   "no_available_qualities": { "message": "No Available Qualities" },
   "open_youtube_page": { "message": "Please open a YouTube video page." },
-  "page_error": { "message": "Page Error" }
+  "short_enabled": { "message": "You need to log in with Google to use this feature smoothly." },
+  "page_error": { "message": "Page Error" },
+    "short_on": { "message": "Short auto-skip: On" },
+  "short_off": { "message": "Short auto-skip: Off" },
+  "pipmasage": { "message": "PIP mode activated" },
+  "pipmagase2": { "message": "No video detected" },
+  "settingtitle": { "message": "Extension Settings" },
+  "goshortcut": { "message": "Check shortcut settings" },
+  "shortcut1": { "message": "PiP mode shortcut" },
+  "shortcut2": { "message": "(PiP mode) Skip backward 10 seconds" },
+  "shortcut3": { "message": "(PiP mode) Skip forward 10 seconds" }
 }

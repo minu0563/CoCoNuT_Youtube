@@ -13,5 +13,26 @@
   "darkLabel": { "message": "深色" },
   "lightLabel": { "message": "浅色" },
   "extensionName": { "message": "CoCoNuT：方便的YouTube观看功能集合" },
-  "defaultTitle": { "message": "YouTube画质设置" }
+  "defaultTitle": { "message": "YouTube画质设置" },
+    "current_quality_display": { "message": "当前播放画质: $1" },
+  "quality_not_detected": { "message": "无法检测当前画质" },
+  "detection_failed": { "message": "画质检测失败" },
+  "player_loading_error": { "message": "播放器加载中或发生错误" },
+  "detection_error": { "message": "画质检测错误" },
+  "loading_text": { "message": "加载中..." },
+  "loading_available_qualities": { "message": "正在加载可用画质..." },
+  "no_available_qualities": { "message": "无可用画质" },
+  "open_youtube_page": { "message": "请打开 YouTube 视频页面。" },
+  "page_error": { "message": "页面错误" },
+    "short_on": { "message": "短视频自动跳过: 开启" },
+  "short_off": { "message": "短视频自动跳过: 关闭" },
+  "pipmasage": { "message": "已启动PIP模式" },
+  "pipmagase2": { "message": "未检测到视频" },
+  "settingtitle": { "message": "扩展设置" },
+  "goshortcut": { "message": "检查快捷键设置" },
+  "shortcut1": { "message": "PiP模式快捷键" },
+  "shortcut2": { "message": "(PiP模式) 后退10秒" },
+  "shortcut3": { "message": "(PiP模式) 前进10秒" },
+  "short_enabled": { "message": "您需要登录 Google 才能顺畅使用此功能。" }
+
 }

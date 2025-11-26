@@ -13,5 +13,26 @@
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Ferramentas convenientes para YouTube" },
-  "defaultTitle": { "message": "Configurações de qualidade do YouTube" }
+  "defaultTitle": { "message": "Configurações de qualidade do YouTube" },
+    "current_quality_display": { "message": "Qualidade de reprodução atual: $1" },
+  "quality_not_detected": { "message": "Qualidade atual não detectada" },
+  "detection_failed": { "message": "Falha na detecção de qualidade" },
+  "player_loading_error": { "message": "O player está carregando ou ocorreu um erro" },
+  "detection_error": { "message": "Erro na detecção de qualidade" },
+  "loading_text": { "message": "Carregando..." },
+  "loading_available_qualities": { "message": "Carregando qualidades disponíveis..." },
+  "no_available_qualities": { "message": "Nenhuma qualidade disponível" },
+  "open_youtube_page": { "message": "Por favor, abra uma página de vídeo do YouTube." },
+  "page_error": { "message": "Erro na página" },
+    "short_on": { "message": "Auto-pular Shorts: Ligado" },
+  "short_off": { "message": "Auto-pular Shorts: Desligado" },
+  "pipmasage": { "message": "Modo PIP ativado" },
+  "pipmagase2": { "message": "Nenhum vídeo detectado" },
+  "settingtitle": { "message": "Configurações da Extensão" },
+  "goshortcut": { "message": "Verificar atalhos" },
+  "shortcut1": { "message": "Atalho do modo PiP" },
+  "shortcut2": { "message": "(Modo PiP) Voltar 10 segundos" },
+  "shortcut3": { "message": "(Modo PiP) Avançar 10 segundos" },
+  "short_enabled": { "message": "Você precisa fazer login com o Google para usar este recurso sem problemas." }
+
 }

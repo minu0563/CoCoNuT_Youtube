@@ -13,5 +13,26 @@
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Handige functies voor YouTube" },
-  "defaultTitle": { "message": "YouTube Kwaliteitsinstellingen" }
+  "defaultTitle": { "message": "YouTube Kwaliteitsinstellingen" },
+  "current_quality_display": { "message": "Huidige afspeelkwaliteit: $1" },
+  "quality_not_detected": { "message": "Huidige kwaliteit niet gedetecteerd" },
+  "detection_failed": { "message": "Kwaliteitsdetectie mislukt" },
+  "player_loading_error": { "message": "Speler wordt geladen of er is een fout opgetreden" },
+  "detection_error": { "message": "Fout bij kwaliteitsdetectie" },
+  "loading_text": { "message": "Laden..." },
+  "loading_available_qualities": { "message": "Beschikbare kwaliteiten laden..." },
+  "no_available_qualities": { "message": "Geen beschikbare kwaliteiten" },
+  "open_youtube_page": { "message": "Open een YouTube-video pagina." },
+  "page_error": { "message": "Paginafout" },
+    "short_on": { "message": "Short auto-skip: Aan" },
+  "short_off": { "message": "Short auto-skip: Uit" },
+  "pipmasage": { "message": "PiP-modus geactiveerd" },
+  "pipmagase2": { "message": "Geen video gedetecteerd" },
+  "settingtitle": { "message": "Extensie-instellingen" },
+  "goshortcut": { "message": "Controleer sneltoetsinstellingen" },
+  "shortcut1": { "message": "PiP-modus sneltoets" },
+  "shortcut2": { "message": "(PiP-modus) 10 seconden terug" },
+  "shortcut3": { "message": "(PiP-modus) 10 seconden vooruit" },
+  "short_enabled": { "message": "U moet inloggen met Google om deze functie soepel te gebruiken." }
+
 }

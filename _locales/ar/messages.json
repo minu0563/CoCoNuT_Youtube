@@ -23,5 +23,16 @@
   "loading_available_qualities": { "message": "جارٍ تحميل قائمة الجودة..." },
   "no_available_qualities": { "message": "لا توجد جودات متاحة" },
   "open_youtube_page": { "message": "يرجى فتح صفحة فيديو YouTube." },
-  "page_error": { "message": "خطأ في الصفحة" }
+  "page_error": { "message": "خطأ في الصفحة" },
+    "short_on": { "message": "التخطي التلقائي للشورتات: تشغيل" },
+  "short_off": { "message": "التخطي التلقائي للشورتات: إيقاف" },
+  "pipmasage": { "message": "تم تفعيل وضع PIP" },
+  "pipmagase2": { "message": "لم يتم اكتشاف الفيديو" },
+  "settingtitle": { "message": "إعدادات الإضافة" },
+  "goshortcut": { "message": "تحقق من إعدادات الاختصارات" },
+  "shortcut1": { "message": "اختصار وضع PiP" },
+  "shortcut2": { "message": "(وضع PiP) تخطي للخلف 10 ثوانٍ" },
+  "shortcut3": { "message": "(وضع PiP) تخطي للأمام 10 ثوانٍ" },
+  "short_enabled": { "message": "يجب عليك تسجيل الدخول باستخدام Google لاستخدام هذه الميزة بسلاسة." }
+
 }

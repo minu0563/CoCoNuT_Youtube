@@ -13,5 +13,26 @@
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Mga Maginhawang Tool para sa Panonood ng YouTube" },
-  "defaultTitle": { "message": "YouTube Quality Settings" }
+  "defaultTitle": { "message": "YouTube Quality Settings" },
+  "current_quality_display": { "message": "Kasalukuyang kalidad ng pag-play: $1" },
+  "quality_not_detected": { "message": "Hindi matukoy ang kasalukuyang kalidad" },
+  "detection_failed": { "message": "Nabigo ang pagtukoy ng kalidad" },
+  "player_loading_error": { "message": "Naglo-load ang player o may naganap na error" },
+  "detection_error": { "message": "Error sa pagtukoy ng kalidad" },
+  "loading_text": { "message": "Naglo-load..." },
+  "loading_available_qualities": { "message": "Naglo-load ng listahan ng mga kalidad..." },
+  "no_available_qualities": { "message": "Walang magagamit na kalidad" },
+  "open_youtube_page": { "message": "Pakibuksan ang pahina ng YouTube video." },
+  "page_error": { "message": "Error sa pahina" },
+    "short_on": { "message": "Awtomatikong laktawan ang Shorts: Buksan" },
+  "short_off": { "message": "Awtomatikong laktawan ang Shorts: Patay" },
+  "pipmasage": { "message": "Na-activate ang PIP mode" },
+  "pipmagase2": { "message": "Walang nadeteksyon na video" },
+  "settingtitle": { "message": "Mga Setting ng Extension" },
+  "goshortcut": { "message": "Suriin ang mga shortcut" },
+  "shortcut1": { "message": "Shortcut para sa PiP mode" },
+  "shortcut2": { "message": "(PiP mode) Laktawan pabalik ng 10 segundo" },
+  "shortcut3": { "message": "(PiP mode) Laktawan pasulong ng 10 segundo" },
+  "short_enabled": { "message": "Kailangan mong mag-login gamit ang Google para magamit nang maayos ang feature na ito." }
+
 }

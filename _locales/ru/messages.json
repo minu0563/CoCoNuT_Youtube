@@ -13,5 +13,26 @@
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Удобные функции для просмотра YouTube" },
-  "defaultTitle": { "message": "Настройки качества YouTube" }
+  "defaultTitle": { "message": "Настройки качества YouTube" },
+    "current_quality_display": { "message": "Текущее качество воспроизведения: $1" },
+  "quality_not_detected": { "message": "Текущее качество не обнаружено" },
+  "detection_failed": { "message": "Ошибка определения качества" },
+  "player_loading_error": { "message": "Проигрыватель загружается или произошла ошибка" },
+  "detection_error": { "message": "Ошибка при определении качества" },
+  "loading_text": { "message": "Загрузка..." },
+  "loading_available_qualities": { "message": "Загрузка доступных качеств..." },
+  "no_available_qualities": { "message": "Доступные качества отсутствуют" },
+  "open_youtube_page": { "message": "Пожалуйста, откройте страницу видео YouTube." },
+  "page_error": { "message": "Ошибка страницы" },
+    "short_on": { "message": "Автопропуск шортов: Вкл" },
+  "short_off": { "message": "Автопропуск шортов: Выкл" },
+  "pipmasage": { "message": "Режим PIP активирован" },
+  "pipmagase2": { "message": "Видео не обнаружено" },
+  "settingtitle": { "message": "Настройки расширения" },
+  "goshortcut": { "message": "Проверить настройки горячих клавиш" },
+  "shortcut1": { "message": "Горячая клавиша режима PiP" },
+  "shortcut2": { "message": "(Режим PiP) Прокрутка назад 10 секунд" },
+  "shortcut3": { "message": "(Режим PiP) Прокрутка вперед 10 секунд" },
+  "short_enabled": { "message": "Чтобы использовать эту функцию без проблем, вам нужно войти через Google." }
+
 }

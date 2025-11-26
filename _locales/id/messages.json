@@ -13,5 +13,26 @@
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Alat Praktis untuk Menonton YouTube" },
-  "defaultTitle": { "message": "Pengaturan Kualitas YouTube" }
+  "defaultTitle": { "message": "Pengaturan Kualitas YouTube" },
+    "current_quality_display": { "message": "Kualitas pemutaran saat ini: $1" },
+  "quality_not_detected": { "message": "Kualitas saat ini tidak terdeteksi" },
+  "detection_failed": { "message": "Gagal mendeteksi kualitas" },
+  "player_loading_error": { "message": "Player sedang memuat atau terjadi kesalahan" },
+  "detection_error": { "message": "Kesalahan deteksi kualitas" },
+  "loading_text": { "message": "Memuat..." },
+  "loading_available_qualities": { "message": "Memuat daftar kualitas yang tersedia..." },
+  "no_available_qualities": { "message": "Tidak ada kualitas yang tersedia" },
+  "open_youtube_page": { "message": "Silakan buka halaman video YouTube." },
+  "page_error": { "message": "Kesalahan halaman" },
+    "short_on": { "message": "Lompati Shorts Otomatis: Aktif" },
+  "short_off": { "message": "Lompati Shorts Otomatis: Mati" },
+  "pipmasage": { "message": "Mode PIP dijalankan" },
+  "pipmagase2": { "message": "Video tidak terdeteksi" },
+  "settingtitle": { "message": "Pengaturan Ekstensi" },
+  "goshortcut": { "message": "Periksa pengaturan pintasan" },
+  "shortcut1": { "message": "Pintasan mode PiP" },
+  "shortcut2": { "message": "(Mode PiP) Mundur 10 detik" },
+  "shortcut3": { "message": "(Mode PiP) Maju 10 detik" },
+  "short_enabled": { "message": "Anda harus masuk dengan Google untuk menggunakan fitur ini dengan lancar." }
+
 }
