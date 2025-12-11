@@ -5,10 +5,8 @@
   "default_locale": "ko",
   "permissions": [
     "storage",
-    "activeTab",
     "scripting",
-    "tabs",
-    "windows"
+    "tabs"
   ],
   "host_permissions": [
     "https://www.youtube.com/*",
