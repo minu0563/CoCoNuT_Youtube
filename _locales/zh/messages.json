@@ -9,7 +9,7 @@
   "shortLabel": { "message": "短视频自动跳过" },
   "shortHelp": { "message": "在 Shorts 页面自动跳到下一个视频" },
   "shortStatus": { "message": "自动跳过: 关闭" },
-  "footerText": { "message": "设置会自动保存。" },
+  "footerText": { "message": "访问 CoCoNuT 官方网页" },
   "darkLabel": { "message": "深色" },
   "lightLabel": { "message": "浅色" },
   "extensionName": { "message": "CoCoNuT：方便的YouTube观看功能集合" },

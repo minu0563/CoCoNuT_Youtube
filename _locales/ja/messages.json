@@ -9,7 +9,7 @@
   "shortLabel": { "message": "ショーツ自動スキップ" },
   "shortHelp": { "message": "ショーツページで次の動画に自動移動" },
   "shortStatus": { "message": "自動スキップ: オフ" },
-  "footerText": { "message": "設定は自動保存されます。" },
+  "footerText": { "message": "CoCoNuT公式ウェブページを訪問する" },
   "darkLabel": { "message": "ダーク" },
   "lightLabel": { "message": "ライト" },
   "extensionName": { "message": "CoCoNuT: 便利なYouTube視聴機能集" },

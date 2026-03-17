@@ -9,7 +9,7 @@
   "shortLabel": { "message": "쇼츠 자동 넘김" },
   "shortHelp": { "message": "shorts 페이지에서 자동으로 다음 영상으로\n넘어갑니다." },
   "shortStatus": { "message": "쇼츠 자동넘김: 꺼짐" },
-  "footerText": { "message": "설정은 자동 저장됩니다." },
+  "footerText": { "message": "CoCoNuT 공식 웹 페이지 방문하기" },
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: 당신의 편리한 유튜브 시청을 위한 기능 모음집" },

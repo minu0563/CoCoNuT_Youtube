@@ -9,7 +9,7 @@
   "shortLabel": { "message": "Auto Skip Shorts" },
   "shortHelp": { "message": "Automatically go to next video on\nShorts page" },
   "shortStatus": { "message": "Auto Skip: Off" },
-  "footerText": { "message": "Settings are saved automatically." },
+  "footerText": { "message": "Visit the official CoCoNuT website" },
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Convenient YouTube Viewing Tools" },

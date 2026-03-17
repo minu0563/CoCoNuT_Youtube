@@ -9,7 +9,7 @@
   "shortLabel": { "message": "Автопропуск Shorts" },
   "shortHelp": { "message": "Автоматически переходить к следующему\nвидео на странице Shorts" },
   "shortStatus": { "message": "Автопропуск: Выключен" },
-  "footerText": { "message": "Настройки сохраняются\nавтоматически." },
+  "footerText": { "message": "Посетить официальный сайт CoCoNuT" },
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT: Удобные функции для просмотра YouTube" },

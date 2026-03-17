@@ -9,7 +9,7 @@
   "shortLabel": { "message": "Sauts automatiques des Shorts" },
   "shortHelp": { "message": "Passer automatiquement à la prochaine vidéo\nsur la page Shorts" },
   "shortStatus": { "message": "Saut automatique : Désactivé" },
-  "footerText": { "message": "Les paramètres sont\nenregistrés automatiquement." },
+  "footerText": { "message": "Visiter le site officiel de CoCoNuT" },
   "darkLabel": { "message": "Dark" },
   "lightLabel": { "message": "Light" },
   "extensionName": { "message": "CoCoNuT : Ensemble d’outils pratiques pour YouTube" },
