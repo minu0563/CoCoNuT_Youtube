@@ -3,6 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeBtn = document.getElementById('themeToggle');
     const themeLabel = document.getElementById('themeLabel');
     const themeIcon = document.getElementById('themeIcon');
+    const selectedColor = localStorage.getItem('selectedColor');
+
+    if (selectedColor) {
+        document.documentElement.style.setProperty('--accent', selectedColor);
+    } else  {
+        document.documentElement.style.setProperty('--accent', '#2563eb');
+    }
 
     // --- 기존 번역 및 테마 기능 ---
     function applyTranslations() {
@@ -41,7 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
             "goshortcut",
             "shortcut1",
             "shortcut2",
-            "shortcut3"
+            "shortcut3",
+            "shortcutLabel",
+            "shortcutHelp",
+            "changeColorLabel",
+            "changeColorHelp",
+            "changeColor",
+            "resetLabel"
         ];
         ids.forEach(id => {
             const el = document.getElementById(id);
@@ -112,4 +125,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+});
+
+
+{/* 색 선택 */}
+const colorPicker = document.getElementById("colorPicker");
+const changeColor = document.getElementById("changeColorBtn");
+
+changeColor.addEventListener('click', () => {
+    colorPicker.showPicker();
+});
+
+colorPicker.addEventListener('input', () => {
+    document.documentElement.style.setProperty('--accent', colorPicker.value);
+    localStorage.setItem('selectedColor', colorPicker.value);
+});
+
+const resetBtn = document.getElementById("reset");
+resetBtn.addEventListener('click', () => {
+    localStorage.removeItem('selectedColor');
+    document.documentElement.style.setProperty('--accent', '#2563eb');
 });

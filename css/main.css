@@ -4,8 +4,8 @@
 	--muted: #635c50;
 	--card: #e9e9e9;
 	--border: #c5c5c5;
-	--accent: #2563eb;
-	--accent-press: #1d4ed8;
+	--accent: ;
+	--accent-press: color-mix(in srgb, var(--accent) 85%, black);;
 	--shadow:
 		0 2px 4px rgba(0, 0, 0, 0.08),
 		0 8px 16px rgba(0, 0, 0, 0.12);
@@ -17,8 +17,9 @@
 	--muted: #9ca3af;
 	--card: #262626;
 	--border: #3a3a3a;
-	--accent: #60a5fa;
-	--accent-press: #3b82f6;
+	--accent: color-mix(in srgb, var(--accent) 80%, white);;
+	--accent-press: color-mix(in srgb, var(--accent) 85%, black);
+;
 	--shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
@@ -84,6 +85,25 @@ body {
 	opacity: .85;
 }
 
+.reset {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--card);
+	border: 1px solid var(--border);
+	border-radius: 9999px;
+	padding: 6px 10px;
+	cursor: pointer;
+	box-shadow: var(--shadow);
+	user-select: none;
+}
+
+.reset span {
+	font-size: 12px;
+	opacity: .85;
+}
+
+
 .container {
 	padding: 14px;
 	display: flex;
@@ -140,6 +160,7 @@ body {
 	font-weight: 700;
 	letter-spacing: .2px;
 	transition: transform .15s ease, background .2s ease;
+	cursor: pointer;
 }
 
 .btn:active {
@@ -220,8 +241,21 @@ body {
 	cursor: pointer;
 }
 
+.reset.floating {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	padding: 8px 14px;
+	border-radius: 20px;
+	background: var(--accent);
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
 select {
 	appearance: none;
+	cursor: pointer;
 }
 
 .custom-select {
@@ -343,30 +377,7 @@ select {
   font-weight: bold;
 }
 
-#goshortcut {
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	color: black;
-	text-decoration: underline;
-	text-decoration-color: black;
-	text-underline-offset: 4px;
-}
-
 #shortlink {
-	text-decoration-line: none;
-}
-
-[data-theme="dark"] #goshortcut {
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	color: rgb(255, 255, 255);
-	text-decoration: underline;
-	text-decoration-color: rgb(255, 255, 255);
-	text-underline-offset: 4px;
+  text-decoration: none;
+  color: #fff;
 }

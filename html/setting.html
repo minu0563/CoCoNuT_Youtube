@@ -10,23 +10,51 @@
 
 <body>
   <header class="header">
+
     <div class="brand">
       <div>
         <div class="title" id="settingtitle"></div>
       </div>
     </div>
-    <p id="back" style="font-size: 20px;vertical-align:middle;margin:0; padding-right: 2px; cursor: pointer;">X</p>
+    <p id="back" style="font-size: 18px;vertical-align:middle;margin:0; padding-right: 2px; cursor: pointer;">X</p>
 
   </header>
-  <div style="padding: 0 20px;">
-    <section class="card" style="margin-top: 15px; padding-left: 0; padding-right: 0;">
+
+  <main class="container">
+
+    <section class="card">
       <div class="shortcut">
-        <div id="title"><a id="shortlink" href="#"><span id="goshortcut"></span></a></div>
+        <div class="row">
+          <div>
+            <div class="label" id="shortcutLabel"></div>
+            <div class="help" id="shortcutHelp"></div>
+          </div>
+          <a id="shortlink" href="#" class="btn"><span id="goshortcut"></span></a>
+        </div>
       </div>
     </section>
-  </div>
 
-  <script src="../js/index.js"></script>
+    <section class="card">
+      <div class="shortcut">
+        <div class="row">
+          <div>
+            <div class="label" id="changeColorLabel"></div>
+            <div class="help" id="changeColorHelp"></div>
+          </div>
+          <div class="btn" id="changeColorBtn">
+            <input type="color" id="colorPicker" hidden>
+            <span id="changeColor"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <button id="reset" class="reset floating" aria-label="Reset">
+      <span id="resetLabel"></span>
+    </button>
+
+    <script src="../js/index.js"></script>
+  </main>
 </body>
 
 </html>
