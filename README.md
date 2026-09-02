@@ -1,4 +1,24 @@
 CoCoNuT's Youtube extension
 
+팀 CoCoNuT의 첫번째 익스텐션입니다.
 
-https://chromewebstore.google.com/detail/coconut-%EB%8B%B9%EC%8B%A0%EC%9D%98-%ED%8E%B8%EB%A6%AC%ED%95%9C-%EC%9C%A0%ED%8A%9C%EB%B8%8C-%EC%8B%9C%EC%B2%AD%EC%9D%84-%EC%9C%84/ckdkiedamneebnodcphbohikgccaheon?hl=en
+기능 목록은 다음과 같습니다.
+
+  - 화질 선택 기능 : 한번 익스텐션을 통해 유튜브 영상의 화질을 선택하면, 화질의 변화 없이 유지되게 해줍니다.
+
+  - PiP 모드 : 단축키를 활용하여 컴퓨터내의 어떠한 위치에서든지 PiP 모드를 실행할수 있게 해줍니다
+               또한, PiP 모드 실행중에 영상의 시점을 이동할수 있습니다.
+
+  - 쇼츠 자동 건너뛰기 모드 : 쇼츠 영상 시청시 영상 종료시 자동으로 건너뛰게 해줍니다.
+                             또한 광고를 자동으로 감지하여 건너뛰게 해줍니다.
+
+
+또한 저희는 다국어 (i18n)기법을 활용하여 다국어를 지원하고 있습니다.
+
+만약 귀하의 언어가 지원하지 않는 상황이라면, "coconut135711@gmail.com"으로 문의 주세요.
+
+저희는 현재 총 조회수 8.2k회, 사용자수 670회를 보유하고 있습니다.
+
+당신의 편리한 유튜브 시청을 위해 언제나 노력하겠습니다.
+
+- Team. CoCoNuT (곽도영)
