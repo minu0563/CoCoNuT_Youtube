@@ -184,12 +184,6 @@
         const video = document.querySelector("video.html5-main-video");
         if (!video || video.readyState < 1) return;
 
-        if (preferredQuality === "Auto") {
-            applyQualityWithPlayerApi("Auto");
-            lastAppliedVideo = video;
-            return;
-        }
-
         if (attemptVideo !== video) {
             attemptVideo = video;
             attemptsForVideo = 0;
