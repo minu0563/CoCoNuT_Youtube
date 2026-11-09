@@ -1,148 +1,92 @@
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;
-    const themeBtn = document.getElementById('themeToggle');
-    const themeLabel = document.getElementById('themeLabel');
-    const themeIcon = document.getElementById('themeIcon');
-    const selectedColor = localStorage.getItem('selectedColor');
+    const themeBtn = document.getElementById("themeToggle");
+    const themeLabel = document.getElementById("themeLabel");
+    const themeIcon = document.getElementById("themeIcon");
+    const backBtn = document.getElementById("back");
+    const colorPicker = document.getElementById("colorPicker");
+    const changeColorBtn = document.getElementById("changeColorBtn");
+    const resetBtn = document.getElementById("reset");
 
-    if (selectedColor) {
-        document.documentElement.style.setProperty('--accent', selectedColor);
-    } else  {
-        document.documentElement.style.setProperty('--accent', '#2563eb');
-    }
+    const DEFAULT_ACCENT = "#2563eb";
+    const selectedColor = localStorage.getItem("selectedColor") || DEFAULT_ACCENT;
+    root.style.setProperty("--accent", selectedColor);
 
-    // --- 기존 번역 및 테마 기능 ---
-    function applyTranslations() {
-        const ids = [
-            "mainTitle",
-            "qualityLabel",
-            "qualityHelp",
-            "pipLabel",
-            "pipHelp",
-            "pipBtn",
-            "pipStatus",
-            "shortLabel",
-            "shortHelp",
-            "shortStatus",
-            "footerText",
-            "darkLabel",
-            "lightLabel",
-            "extensionName",
-            "defaultTitle",
-            "current_quality_display",
-            "quality_not_detected",
-            "detection_failed",
-            "player_loading_error",
-            "detection_error",
-            "loading_text",
-            "loading_available_qualities",
-            "no_available_qualities",
-            "open_youtube_page",
-            "page_error",
-            "short_enabled",
-            "short_on",
-            "short_off",
-            "pipmasage",
-            "pipmasage2",
-            "settingtitle",
-            "goshortcut",
-            "shortcut1",
-            "shortcut2",
-            "shortcut3",
-            "shortcutLabel",
-            "shortcutHelp",
-            "changeColorLabel",
-            "changeColorHelp",
-            "changeColor",
-            "resetLabel"
-        ];
-        ids.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.textContent = chrome.i18n.getMessage(id);
+    function translateElements() {
+        document.querySelectorAll("[data-i18n]").forEach((element) => {
+            const message = chrome.i18n.getMessage(element.dataset.i18n);
+            if (message) element.textContent = message;
         });
-        const theme = localStorage.getItem("selectedTheme") || "light";
-        if (themeLabel)
-            themeLabel.textContent = theme === "dark"
-                ? chrome.i18n.getMessage("darkLabel")
-                : chrome.i18n.getMessage("lightLabel");
+
+        const ids = [
+            "mainTitle", "qualityLabel", "qualityHelp", "pipLabel", "pipHelp",
+            "shortLabel", "shortHelp", "shortStatus", "footerText", "settingtitle",
+            "shortcutLabel", "shortcutHelp", "goshortcut", "changeColorLabel",
+            "changeColorHelp", "changeColor", "resetLabel"
+        ];
+
+        ids.forEach((id) => {
+            const element = document.getElementById(id);
+            const message = chrome.i18n.getMessage(id);
+            if (element && message) element.textContent = message;
+        });
     }
-    applyTranslations();
 
     function applyTheme(theme) {
-        root.setAttribute('data-theme', theme);
-        if (themeIcon)
-            themeIcon.src = theme === 'dark' ? '../dark.png' : '../white.png';
-        if (themeLabel)
-            themeLabel.textContent = theme === 'dark'
-                ? chrome.i18n.getMessage("darkLabel")
-                : chrome.i18n.getMessage("lightLabel");
-    }
+        const normalizedTheme = theme === "dark" ? "dark" : "light";
+        root.dataset.theme = normalizedTheme;
 
-    const storedTheme = localStorage.getItem("selectedTheme") || "light";
-    applyTheme(storedTheme);
+        if (themeIcon) {
+            themeIcon.src = normalizedTheme === "dark" ? "../dark.png" : "../white.png";
+        }
 
-    if (themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            applyTheme(next);
-            localStorage.setItem('selectedTheme', next);
-        });
-    }
-
-    const backBtn = document.getElementById("back");
-    if (backBtn) {
-        backBtn.addEventListener("click", () => {
-            window.location.href = "index.html"; 
-        });
-    }
-});
-
-const short = document.getElementById("shortlink");
-if (short) {
-    short.addEventListener('click', (e) => {
-        e.preventDefault();
-        chrome.tabs.create({ url: 'chrome://extensions/shortcuts'});
-    })
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const shortAuto = document.getElementById("shortAuto");
-
-    // i18n 기반 alert 함수
-    function showLocalizedAlert(messageId, placeholders = []) {
-        const msg = chrome.i18n.getMessage(messageId, placeholders);
-        if (msg) {
-            alert(msg);
+        if (themeLabel) {
+            themeLabel.textContent = chrome.i18n.getMessage(
+                normalizedTheme === "dark" ? "darkLabel" : "lightLabel"
+            );
         }
     }
 
-    if (shortAuto) {
-        shortAuto.addEventListener("click", function() {
-            if (this.checked) {
-                showLocalizedAlert("short_enabled");
+    translateElements();
+    applyTheme(localStorage.getItem("selectedTheme") || "light");
+
+    themeBtn?.addEventListener("click", () => {
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+        localStorage.setItem("selectedTheme", nextTheme);
+        applyTheme(nextTheme);
+    });
+
+    backBtn?.addEventListener("click", () => {
+        window.location.href = "index.html";
+    });
+
+    if (colorPicker) {
+        colorPicker.value = selectedColor;
+        colorPicker.addEventListener("input", () => {
+            root.style.setProperty("--accent", colorPicker.value);
+            localStorage.setItem("selectedColor", colorPicker.value);
+        });
+    }
+
+    if (changeColorBtn && colorPicker) {
+        changeColorBtn.addEventListener("click", () => {
+            if (typeof colorPicker.showPicker === "function") {
+                colorPicker.showPicker();
             } else {
-                showLocalizedAlert("short_disabled");
+                colorPicker.click();
             }
         });
     }
-});
 
+    resetBtn?.addEventListener("click", () => {
+        localStorage.removeItem("selectedColor");
+        root.style.setProperty("--accent", DEFAULT_ACCENT);
+        if (colorPicker) colorPicker.value = DEFAULT_ACCENT;
+    });
 
-{/* 색 선택 */}
-const colorPicker = document.getElementById("colorPicker");
-const changeColor = document.getElementById("changeColorBtn");
-
-changeColor.addEventListener('click', () => {
-    colorPicker.showPicker();
-});
-
-colorPicker.addEventListener('input', () => {
-    document.documentElement.style.setProperty('--accent', colorPicker.value);
-    localStorage.setItem('selectedColor', colorPicker.value);
-});
-
-const resetBtn = document.getElementById("reset");
-resetBtn.addEventListener('click', () => {
-    localStorage.removeItem('selectedColor');
-    document.documentElement.style.setProperty('--accent', '#2563eb');
+    const shortLink = document.getElementById("shortlink");
+    shortLink?.addEventListener("click", (event) => {
+        event.preventDefault();
+        chrome.tabs.create({ url: "chrome://extensions/shortcuts" });
+    });
 });
