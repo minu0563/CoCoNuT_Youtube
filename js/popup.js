@@ -87,6 +87,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const pipButton = document.getElementById("pipBtn");
     const pipStatus = document.getElementById("pipStatus");
 
+    if (pipButton) pipButton.textContent = message("pipBtn") || "PiP 실행";
+
     chrome.storage.local.get(["shortAuto"], (result) => {
         const isEnabled = result.shortAuto === true;
         if (shortAuto) shortAuto.checked = isEnabled;
