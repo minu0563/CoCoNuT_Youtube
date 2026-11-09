@@ -1,54 +1,105 @@
 (() => {
-  if (window.__shortAutoSkipLoaded) return; 
-  window.__shortAutoSkipLoaded = true;
+    if (window.__coconutShortsLoaded) return;
+    window.__coconutShortsLoaded = true;
 
-  let isAutoSkipOn = false;
-  let skipCooldown = false;
-  let lastUrl = location.href;
+    let enabled = false;
+    let currentVideo = null;
+    let skipRequested = false;
+    let lastUrl = location.href;
 
-  chrome.storage.local.get(['shortAuto'], (r) => {
-    isAutoSkipOn = r.shortAuto === true;
-  });
-  chrome.storage.onChanged.addListener((changes, area) => {
-    if (area === 'local' && changes.shortAuto) {
-      isAutoSkipOn = changes.shortAuto.newValue === true;
+    const AD_LABELS = [
+        "sponsored", "advertisement", "advert", "광고", "annonce",
+        "publicité", "werbung", "patrocinado", "anúncio", "广告",
+        "廣告", "広告", "реклама", "إعلان", "اعلان"
+    ];
+
+    chrome.storage.local.get(["shortAuto"], (result) => {
+        enabled = result.shortAuto === true;
+    });
+
+    chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === "local" && changes.shortAuto) {
+            enabled = changes.shortAuto.newValue === true;
+            if (!enabled) skipRequested = false;
+        }
+    });
+
+    function isShortsPage() {
+        return location.pathname.startsWith("/shorts/");
     }
-  });
 
-  const adWords = [
-    "ad","ads","sponsored","sponsor","광고","advertisement",
-    "annonce","publicité","werbung","iklan","patrocinado",
-    "anúncio","广告","廣告","広告","реклама","إعلان","اعلان"
-  ];
+    function isAdvertisement() {
+        const badges = document.querySelectorAll(
+            ".yt-badge-shape__text, .badge-style-type-ad, [aria-label]"
+        );
 
-  function isAdBadge() {
-    const badge = document.querySelector(".yt-badge-shape__text");
-    if (!badge) return false;
-    const text = badge.innerText.trim().toLowerCase().replace(/\s+/g, "");
-    return adWords.some(w => text.includes(w));
-  }
+        return [...badges].some((element) => {
+            const text = (
+                element.innerText ||
+                element.getAttribute("aria-label") ||
+                ""
+            ).trim().toLowerCase().replace(/\s+/g, " ");
 
-  function doSkip(nextBtn) {
-    if (!nextBtn || skipCooldown) return;
-    skipCooldown = true;
-    nextBtn.click();
-    setTimeout(() => { skipCooldown = false; }, 1000);
-  }
+            if (!text) return false;
+            if (AD_LABELS.some((label) => text === label || text.startsWith(label + " "))) {
+                return true;
+            }
+            return /\bads?\b|\bsponsored\b|\badvertisement\b/i.test(text);
+        });
+    }
 
-  function trySkipShort() {
-    if (!isAutoSkipOn) return;                
-    if (!location.href.includes("/shorts/")) return;
+    function getNextButton() {
+        return document.querySelector(
+            "#navigation-button-down button, ytd-reel-video-renderer[is-active] #navigation-button-down button"
+        );
+    }
 
-    const video = document.querySelector("video");
-    const nextBtn = document.querySelector('#navigation-button-down button');
-    if (!video || !nextBtn) return;     
+    function skipToNext() {
+        if (skipRequested) return false;
+        const button = getNextButton();
+        if (!button || button.disabled) return false;
 
-    const progress = (video.currentTime / video.duration) * 100;
-    if (isAdBadge() || progress >= 98) doSkip(nextBtn);
-  }
+        skipRequested = true;
+        button.click();
+        return true;
+    }
 
-  setInterval(() => {
-    if (location.href !== lastUrl) { lastUrl = location.href; skipCooldown = false; }
-  }, 200);
-  setInterval(trySkipShort, 350);
+    function checkShort() {
+        if (!enabled || !isShortsPage()) {
+            currentVideo = null;
+            skipRequested = false;
+            return;
+        }
+
+        const video = document.querySelector("video.html5-main-video, ytd-reel-video-renderer video");
+        if (!video) return;
+
+        if (video !== currentVideo || location.href !== lastUrl) {
+            currentVideo = video;
+            lastUrl = location.href;
+            skipRequested = false;
+        }
+
+        if (isAdvertisement()) {
+            skipToNext();
+            return;
+        }
+
+        if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+
+        const progress = video.currentTime / video.duration;
+        if (video.ended || progress >= 0.985) skipToNext();
+    }
+
+    document.addEventListener("yt-navigate-finish", () => {
+        currentVideo = null;
+        skipRequested = false;
+        lastUrl = location.href;
+    });
+
+    document.addEventListener("ended", (event) => {
+        if (event.target?.tagName === "VIDEO") checkShort();
+    }, true);
+
+    setInterval(checkShort, 500);
 })();
