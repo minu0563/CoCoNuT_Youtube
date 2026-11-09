@@ -6,7 +6,7 @@
     let lastUrl = location.href;
     let skipCooldown = false;
 
-    const AD_TEXT_PATTERN = /\\bads?\\b|\\bsponsored\\b|\\badvertisement\\b|\\badvert\\b|광고|annonce|publicité|werbung|patrocinado|anúncio|广告|廣告|広告|реклама|إعلان|اعلان/i;
+    const AD_TEXT_PATTERN = /\bads?\b|\bsponsored\b|\badvertisement\b|\badvert\b|광고|annonce|publicité|werbung|patrocinado|anúncio|广告|廣告|広告|реклама|إعلان|اعلان/i;
 
     chrome.storage.local.get(["shortAuto"], (result) => {
         enabled = result.shortAuto === true;
@@ -33,7 +33,7 @@
         return candidates.some((element) => {
             const text = (element.innerText || element.textContent || element.getAttribute("aria-label") || "")
                 .trim()
-                .replace(/\\s+/g, " ");
+                .replace(/\s+/g, " ");
             return text.length > 0 && AD_TEXT_PATTERN.test(text);
         });
     }
