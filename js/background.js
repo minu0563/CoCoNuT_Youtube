@@ -8,15 +8,18 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 chrome.commands.onCommand.addListener(async (command) => {
     try {
-        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        if (!tab?.id || !tab.url) return;
-
-        const url = new URL(tab.url);
-        if (url.protocol !== "https:" || url.hostname !== "www.youtube.com") return;
-
         if (command === "toggle_pip") {
+            // The shortcut is global: find the most recently used YouTube tab,
+            // even when another tab or application currently has focus.
+            const tabs = await chrome.tabs.query({ url: ["https://www.youtube.com/*"] });
+            const youtubeTabs = tabs
+                .filter((tab) => Number.isInteger(tab.id))
+                .sort((a, b) => (b.lastAccessed || 0) - (a.lastAccessed || 0));
+            const targetTab = youtubeTabs[0];
+            if (!targetTab) return;
+
             await chrome.scripting.executeScript({
-                target: { tabId: tab.id },
+                target: { tabId: targetTab.id },
                 func: async () => {
                     const video = document.querySelector("video.html5-main-video");
                     if (!video) return;
@@ -36,6 +39,9 @@ chrome.commands.onCommand.addListener(async (command) => {
         }
 
         if (command === "skip_backward" || command === "skip_forward") {
+            const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+            if (!tab?.id || !tab.url?.startsWith("https://www.youtube.com/")) return;
+
             await chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 func: (direction) => {
