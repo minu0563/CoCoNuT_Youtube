@@ -1,45 +1,143 @@
 {
-  "mainTitle": { "message": "YouTube 설정" },
-  "qualityLabel": { "message": "화질 고정" },
-  "qualityHelp": { "message": "동영상 시작 시 자동으로 설정" },
-  "pipLabel": { "message": "PiP 모드" },
-  "pipHelp": { "message": "현재 탭의 동영상을 화면 밖에서도 보기" },
-  "pipBtn": { "message": "PiP 실행" },
-  "pipStatus": { "message": "PiP: 감지 대기" },
-  "shortLabel": { "message": "쇼츠 자동 넘김" },
-  "shortHelp": { "message": "shorts 페이지에서 자동으로 다음 영상으로\n넘어갑니다." },
-  "shortStatus": { "message": "쇼츠 자동넘김: 꺼짐" },
-  "footerText": { "message": "CoCoNuT 공식 웹 페이지 방문하기" },
-  "darkLabel": { "message": "Dark" },
-  "lightLabel": { "message": "Light" },
-  "extensionName": { "message": "CoCoNuT: 당신의 편리한 유튜브 시청을 위한 기능 모음집" },
-  "defaultTitle": { "message": "YouTube 화질 설정" },
-  
-  "current_quality_display": { "message": "현재 재생 화질: $1" },
-  "quality_not_detected": { "message": "현재 화질 감지 불가" },
-  "detection_failed": { "message": "화질 감지 실패" },
-  "player_loading_error": { "message": "플레이어 로딩 중이거나 오류 발생" },
-  "detection_error": { "message": "화질 감지 오류" },
-  "loading_text": { "message": "로딩 중..." },
-  "loading_available_qualities": { "message": "화질 목록 로드 중..." },
-  "no_available_qualities": { "message": "사용 가능한 화질 없음" },
-  "open_youtube_page": { "message": "YouTube 영상 페이지를 열어주세요." },
-  "page_error": { "message": "페이지 오류" },
-  "short_enabled": { "message": "구글 로그인을 해야 기능을 원활하게 사용할 수 있습니다." },
-
-  "short_on" : { "message": "쇼츠 자동넘김: 켜짐" },
-  "short_off" : { "message": "쇼츠 자동넘김: 꺼짐" },
-  "pipmasage" : { "message" : "PIP 모드를 실행했습니다"},
-  "pipmagase2" : { "message" : "영상이 감지되지 않았습니다"},
-  "settingtitle" : { "message" : "Extension 설정"},
-  "goshortcut" : { "message" : "확인"},
-  "shortcutLabel" : { "message" : "단축키 설정"},
-  "shortcutHelp" : { "message" : "현재 등록된 단축키를 확인하고 변경합니다." },
-  "shortcut1" : { "message" : "PiP 모드 단축키"},
-  "shortcut2" : { "message" : "(PiP 모드) 10초 뒤로 건너뛰기"},
-  "shortcut3" : { "message" : "(PiP 모드) 10초 앞으로 건너뛰기"},
-  "changeColorLabel"  : { "message" : "색상 변경"},
-  "changeColorHelp"  : { "message" : "확장 프로그램의 버튼 색상을 변경합니다."},
-  "changeColor"  : { "message" : "선택"},
-  "resetLabel"  : { "message" : "초기화"}
+  "mainTitle": {
+    "message": "YouTube 설정"
+  },
+  "qualityLabel": {
+    "message": "화질 고정"
+  },
+  "qualityHelp": {
+    "message": "동영상 시작 시 자동으로 설정"
+  },
+  "pipLabel": {
+    "message": "PiP 모드"
+  },
+  "pipHelp": {
+    "message": "현재 탭의 동영상을 화면 밖에서도 보기"
+  },
+  "pipBtn": {
+    "message": "PiP 실행"
+  },
+  "pipStatus": {
+    "message": "PiP: 감지 대기"
+  },
+  "shortLabel": {
+    "message": "쇼츠 자동 넘김"
+  },
+  "shortHelp": {
+    "message": "shorts 페이지에서 자동으로 다음 영상으로\n넘어갑니다."
+  },
+  "shortStatus": {
+    "message": "쇼츠 자동넘김: 꺼짐"
+  },
+  "footerText": {
+    "message": "CoCoNuT 공식 웹 페이지 방문하기"
+  },
+  "darkLabel": {
+    "message": "Dark"
+  },
+  "lightLabel": {
+    "message": "Light"
+  },
+  "extensionName": {
+    "message": "CoCoNuT: 당신의 편리한 유튜브 시청을 위한 기능 모음집"
+  },
+  "defaultTitle": {
+    "message": "YouTube 화질 설정"
+  },
+  "current_quality_display": {
+    "message": "현재 재생 화질: $1"
+  },
+  "quality_not_detected": {
+    "message": "현재 화질 감지 불가"
+  },
+  "detection_failed": {
+    "message": "화질 감지 실패"
+  },
+  "player_loading_error": {
+    "message": "플레이어 로딩 중이거나 오류 발생"
+  },
+  "detection_error": {
+    "message": "화질 감지 오류"
+  },
+  "loading_text": {
+    "message": "로딩 중..."
+  },
+  "loading_available_qualities": {
+    "message": "화질 목록 로드 중..."
+  },
+  "no_available_qualities": {
+    "message": "사용 가능한 화질 없음"
+  },
+  "open_youtube_page": {
+    "message": "YouTube 영상 페이지를 열어주세요."
+  },
+  "page_error": {
+    "message": "페이지 오류"
+  },
+  "short_enabled": {
+    "message": "구글 로그인을 해야 기능을 원활하게 사용할 수 있습니다."
+  },
+  "short_on": {
+    "message": "쇼츠 자동넘김: 켜짐"
+  },
+  "short_off": {
+    "message": "쇼츠 자동넘김: 꺼짐"
+  },
+  "pipmasage": {
+    "message": "PIP 모드를 실행했습니다"
+  },
+  "pipmagase2": {
+    "message": "영상이 감지되지 않았습니다"
+  },
+  "settingtitle": {
+    "message": "Extension 설정"
+  },
+  "goshortcut": {
+    "message": "확인"
+  },
+  "shortcutLabel": {
+    "message": "단축키 설정"
+  },
+  "shortcutHelp": {
+    "message": "현재 등록된 단축키를 확인하고 변경합니다."
+  },
+  "shortcut1": {
+    "message": "PiP 모드 단축키"
+  },
+  "shortcut2": {
+    "message": "(PiP 모드) 10초 뒤로 건너뛰기"
+  },
+  "shortcut3": {
+    "message": "(PiP 모드) 10초 앞으로 건너뛰기"
+  },
+  "changeColorLabel": {
+    "message": "색상 변경"
+  },
+  "changeColorHelp": {
+    "message": "확장 프로그램의 버튼 색상을 변경합니다."
+  },
+  "changeColor": {
+    "message": "선택"
+  },
+  "resetLabel": {
+    "message": "초기화"
+  },
+  "quality_auto": {
+    "message": "자동"
+  },
+  "quality_connection_error": {
+    "message": "YouTube 플레이어에 연결할 수 없습니다. 영상을 새로고침한 뒤 다시 시도하세요."
+  },
+  "pip_started": {
+    "message": "PiP 모드를 실행했습니다."
+  },
+  "pip_exited": {
+    "message": "PiP 모드를 종료했습니다."
+  },
+  "pip_no_video": {
+    "message": "재생 중인 동영상을 찾을 수 없습니다."
+  },
+  "pip_failed": {
+    "message": "PiP 모드를 실행하지 못했습니다. 브라우저 지원 여부와 영상 상태를 확인하세요."
+  }
 }
