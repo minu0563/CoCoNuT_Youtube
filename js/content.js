@@ -22,6 +22,8 @@
     let preferredQuality = null;
     let applyTimer = null;
     let lastAppliedVideo = null;
+    let attemptVideo = null;
+    let attemptsForVideo = 0;
 
     function getPlayer() {
         return document.getElementById("movie_player");
@@ -87,8 +89,10 @@
     }
 
     function normalizeQuality(value) {
-        if (!value || value.toLowerCase() === "auto" || value === "자동") return "Auto";
-        const match = value.match(/(\d{3,4})\s*p/i);
+        if (typeof value !== "string" || !value.trim()) return null;
+        const normalized = value.trim().toLowerCase();
+        if (normalized === "auto" || normalized === "자동") return "Auto";
+        const match = normalized.match(/(\d{3,4})\s*p/i);
         return match ? match[1] + "p" : null;
     }
 
@@ -98,18 +102,28 @@
 
         try {
             if (quality === "Auto") {
-                player.setPlaybackQualityRange?.("auto", "auto");
-                player.setPlaybackQuality?.("auto");
-                return true;
+                if (typeof player.setPlaybackQualityRange === "function") {
+                    player.setPlaybackQualityRange("auto", "auto");
+                    return true;
+                }
+                if (typeof player.setPlaybackQuality === "function") {
+                    player.setPlaybackQuality("auto");
+                    return true;
+                }
+                return false;
             }
 
             const level = QUALITY_LEVELS[quality];
             const availableLevels = player.getAvailableQualityLevels?.() || [];
             const targetLevel = level && availableLevels.includes(level) ? level : null;
 
-            if (targetLevel) {
-                player.setPlaybackQualityRange?.(targetLevel, targetLevel);
+            if (targetLevel && typeof player.setPlaybackQualityRange === "function") {
+                player.setPlaybackQualityRange(targetLevel, targetLevel);
                 player.setPlaybackQuality?.(targetLevel);
+                return true;
+            }
+            if (targetLevel && typeof player.setPlaybackQuality === "function") {
+                player.setPlaybackQuality(targetLevel);
                 return true;
             }
         } catch (error) {
@@ -176,13 +190,21 @@
             return;
         }
 
+        if (attemptVideo !== video) {
+            attemptVideo = video;
+            attemptsForVideo = 0;
+        }
+        if (attemptsForVideo >= 8) return;
+        attemptsForVideo += 1;
+
         if (applyQualityWithPlayerApi(preferredQuality)) {
             lastAppliedVideo = video;
             return;
         }
 
-        await applyQualityWithMenu(preferredQuality);
-        lastAppliedVideo = video;
+        if (await applyQualityWithMenu(preferredQuality)) {
+            lastAppliedVideo = video;
+        }
     }
 
     function scheduleQualityApply(delay = 700) {
@@ -204,16 +226,22 @@
         if (area !== "local" || !changes.preferredQuality) return;
         preferredQuality = normalizeQuality(changes.preferredQuality.newValue);
         lastAppliedVideo = null;
+        attemptVideo = null;
+        attemptsForVideo = 0;
         scheduleQualityApply(300);
     });
 
     document.addEventListener("yt-navigate-finish", () => {
         lastAppliedVideo = null;
+        attemptVideo = null;
+        attemptsForVideo = 0;
         scheduleQualityApply(1200);
     });
 
     document.addEventListener("yt-page-data-updated", () => {
         lastAppliedVideo = null;
+        attemptVideo = null;
+        attemptsForVideo = 0;
         scheduleQualityApply(1000);
     });
 
@@ -252,6 +280,8 @@
 
                 preferredQuality = quality;
                 lastAppliedVideo = null;
+                attemptVideo = null;
+                attemptsForVideo = 0;
                 scheduleQualityApply(100);
                 sendResponse({ ok: true, preferredQuality: quality });
             });
