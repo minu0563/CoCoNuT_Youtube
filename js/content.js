@@ -221,15 +221,11 @@
         if (event.target?.tagName === "VIDEO") scheduleQualityApply(500);
     }, true);
 
-    const videoObserver = new MutationObserver(() => {
+    // Detect player replacement without observing the entire YouTube DOM.
+    setInterval(() => {
         const video = document.querySelector("video.html5-main-video");
-        if (video && video !== lastAppliedVideo) scheduleQualityApply(800);
-    });
-
-    videoObserver.observe(document.documentElement, {
-        childList: true,
-        subtree: true
-    });
+        if (video && video !== lastAppliedVideo) scheduleQualityApply(500);
+    }, 1000);
 
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message?.type === "GET_QUALITIES") {
