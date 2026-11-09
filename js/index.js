@@ -128,21 +128,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-{/* 색 선택 */}
+// 색상 설정 요소는 setting.html에만 존재하므로 요소가 있을 때만 이벤트를 등록한다.
 const colorPicker = document.getElementById("colorPicker");
 const changeColor = document.getElementById("changeColorBtn");
-
-changeColor.addEventListener('click', () => {
-    colorPicker.showPicker();
-});
-
-colorPicker.addEventListener('input', () => {
-    document.documentElement.style.setProperty('--accent', colorPicker.value);
-    localStorage.setItem('selectedColor', colorPicker.value);
-});
-
 const resetBtn = document.getElementById("reset");
-resetBtn.addEventListener('click', () => {
-    localStorage.removeItem('selectedColor');
-    document.documentElement.style.setProperty('--accent', '#2563eb');
-});
+
+if (colorPicker) {
+    colorPicker.value = localStorage.getItem("selectedColor") || "#2563eb";
+
+    colorPicker.addEventListener("input", () => {
+        document.documentElement.style.setProperty("--accent", colorPicker.value);
+        localStorage.setItem("selectedColor", colorPicker.value);
+    });
+}
+
+if (changeColor && colorPicker) {
+    changeColor.addEventListener("click", () => {
+        colorPicker.showPicker();
+    });
+}
+
+if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+        localStorage.removeItem("selectedColor");
+        document.documentElement.style.setProperty("--accent", "#2563eb");
+        if (colorPicker) colorPicker.value = "#2563eb";
+    });
+}
