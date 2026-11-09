@@ -1,24 +1,28 @@
-CoCoNuT's Youtube extension
+# CoCoNuT YouTube Extension
 
-팀 CoCoNuT의 첫번째 익스텐션입니다.
+CoCoNuT is a Chrome extension that adds convenience features to YouTube.
 
-기능 목록은 다음과 같습니다.
+## Features
 
-  - 화질 선택 기능 : 한번 익스텐션을 통해 유튜브 영상의 화질을 선택하면, 화질의 변화 없이 유지되게 해줍니다.
+- **Quality preference:** Save a preferred playback quality and reapply it when YouTube changes videos through its single-page navigation.
+- **Picture-in-Picture:** Start or stop PiP from the popup or the configured keyboard shortcut.
+- **PiP seeking shortcuts:** Seek backward or forward by 10 seconds while PiP is active.
+- **Shorts auto-advance:** Move to the next Short when the current video ends and attempt to skip clearly labeled advertisements.
+- **Localization:** Korean and English interface strings.
+- **Appearance:** Light/dark theme and a customizable accent color.
 
-  - PiP 모드 : 단축키를 활용하여 컴퓨터내의 어떠한 위치에서든지 PiP 모드를 실행할수 있게 해줍니다
-               또한, PiP 모드 실행중에 영상의 시점을 이동할수 있습니다.
+## Development
 
-  - 쇼츠 자동 건너뛰기 모드 : 쇼츠 영상 시청시 영상 종료시 자동으로 건너뛰게 해줍니다.
-                             또한 광고를 자동으로 감지하여 건너뛰게 해줍니다.
+1. Open `chrome://extensions`.
+2. Enable Developer mode.
+3. Select **Load unpacked** and choose this repository directory.
+4. Open a YouTube video and test the popup features.
 
+After changing extension files, use **Reload** on the extension details page and refresh the YouTube tab so the updated content scripts are loaded.
 
-또한 저희는 다국어 (i18n)기법을 활용하여 다국어를 지원하고 있습니다.
+## Notes
 
-만약 귀하의 언어가 지원하지 않는 상황이라면, "coconut135711@gmail.com"으로 문의 주세요.
-
-저희는 현재 총 조회수 8.2k회, 사용자수 670회를 보유하고 있습니다.
-
-당신의 편리한 유튜브 시청을 위해 언제나 노력하겠습니다.
-
-- Team. CoCoNuT (곽도영)
+- YouTube changes its player UI and internal player APIs over time. Quality selection and advertisement detection therefore require periodic compatibility testing.
+- Automatic advertisement skipping depends on YouTube exposing a recognizable advertisement label in the page.
+- Keyboard shortcuts can be changed at `chrome://extensions/shortcuts`.
+- The extension stores the preferred quality and Shorts toggle in `chrome.storage.local`. Theme and accent settings are stored in the extension page's local storage.
