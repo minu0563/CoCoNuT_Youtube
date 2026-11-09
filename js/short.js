@@ -30,7 +30,7 @@
 
     function isAdvertisement() {
         const badges = document.querySelectorAll(
-            ".yt-badge-shape__text, .badge-style-type-ad, [aria-label]"
+            ".yt-badge-shape__text, .badge-style-type-ad, ytd-ad-slot-renderer, ytd-promoted-sparkles-web-renderer, [class*='ad-badge']"
         );
 
         return [...badges].some((element) => {
