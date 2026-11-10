@@ -120,29 +120,31 @@ document.addEventListener("DOMContentLoaded", () => {
         shortAuto.addEventListener("click", function() {
             if (this.checked) {
                 showLocalizedAlert("short_enabled");
-            } else {
-                showLocalizedAlert("short_disabled");
             }
         });
     }
 });
 
 
-{/* 색 선택 */}
+// 색 선택 (setting.html에만 있는 요소이므로 없으면 건너뜀)
 const colorPicker = document.getElementById("colorPicker");
 const changeColor = document.getElementById("changeColorBtn");
 
-changeColor.addEventListener('click', () => {
-    colorPicker.showPicker();
-});
+if (colorPicker && changeColor) {
+    changeColor.addEventListener('click', () => {
+        colorPicker.showPicker();
+    });
 
-colorPicker.addEventListener('input', () => {
-    document.documentElement.style.setProperty('--accent', colorPicker.value);
-    localStorage.setItem('selectedColor', colorPicker.value);
-});
+    colorPicker.addEventListener('input', () => {
+        document.documentElement.style.setProperty('--accent', colorPicker.value);
+        localStorage.setItem('selectedColor', colorPicker.value);
+    });
+}
 
 const resetBtn = document.getElementById("reset");
-resetBtn.addEventListener('click', () => {
-    localStorage.removeItem('selectedColor');
-    document.documentElement.style.setProperty('--accent', '#2563eb');
-});
+if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+        localStorage.removeItem('selectedColor');
+        document.documentElement.style.setProperty('--accent', '#2563eb');
+    });
+}

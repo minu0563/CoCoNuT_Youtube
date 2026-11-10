@@ -1,6 +1,14 @@
 const qualitySelect = document.getElementById('qualitySelect');
 const currentQualityDisplay = document.getElementById('detectedQuality');
 
+function isYouTubeUrl(url) {
+    try {
+        return new URL(url).hostname === 'www.youtube.com';
+    } catch (e) {
+        return false;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const shortAuto = document.getElementById("shortAuto");
     const switchEl = shortAuto?.parentElement;
@@ -23,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         const tab = tabs[0];
 
-        if (!tab?.url?.includes('youtube.com')) {
+        if (!isYouTubeUrl(tab?.url)) {
             currentQualityDisplay.textContent = chrome.i18n.getMessage("open_youtube_page");
             qualitySelect.innerHTML = `<option value="" disabled selected>${chrome.i18n.getMessage("page_error")}</option>`;
             return;
@@ -53,39 +61,6 @@ function getCurrentPlaybackQuality() {
     return match ? match[1] : null;
 }
 
-function detectAvailableQualities() {
-    const wait = ms => new Promise(r => setTimeout(r, ms));
-
-    return (async () => {
-        const settingsBtn = document.querySelector('.ytp-settings-button');
-        if (!settingsBtn) return [];
-
-        settingsBtn.click();
-        await wait(100);
-
-        const menuItems = [...document.querySelectorAll('.ytp-menuitem-label')];
-        const qualityMenu = menuItems.find(m =>
-            ["화질","quality","画質","画质","qualité","qualität","kwaliteit","kalidad","kualitas","qualidade","جودة","качество"]
-            .some(k => m.textContent.toLowerCase().includes(k))
-        )?.parentElement;
-
-        if (!qualityMenu) {
-            settingsBtn.click();
-            return [];
-        }
-
-        qualityMenu.click();
-        await wait(100);
-
-        const items = [...document.querySelectorAll('.ytp-menuitem-label')]
-            .map(o => o.textContent.trim())
-            .filter(t => /p/i.test(t) || /auto|자동/i.test(t));
-
-        settingsBtn.click();
-        return items;
-    })();
-}
-
 function updateCurrentQuality(tabId) {
     chrome.scripting.executeScript({
         target: { tabId },
@@ -100,82 +75,70 @@ function updateCurrentQuality(tabId) {
             : chrome.i18n.getMessage("quality_not_detected");
 
         qualitySelect.dataset.loaded = q ? 'false' : 'true';
-        qualitySelect.innerHTML = q
-            ? `<option value="${q}" selected>${q}</option>`
-            : `<option value="" disabled selected>${chrome.i18n.getMessage("detection_failed")}</option>`;
+        qualitySelect.replaceChildren(makeOption(
+            q || "",
+            q || chrome.i18n.getMessage("detection_failed"),
+            { selected: true, disabled: !q }
+        ));
+    }).catch(() => {
+        currentQualityDisplay.textContent = chrome.i18n.getMessage("quality_not_detected");
     });
 }
 
+function makeOption(value, text, { selected = false, disabled = false } = {}) {
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = text;
+    opt.selected = selected;
+    opt.disabled = disabled;
+    return opt;
+}
 
+// 화질 목록은 content.js가 유튜브 설정 메뉴를 열어서 읽어온다.
 function loadAvailableQualities(tabId) {
     if (qualitySelect.dataset.loaded === 'true') return;
 
     const currentQ = qualitySelect.dataset.currentQuality || "";
 
-    qualitySelect.innerHTML = `<option disabled selected>${chrome.i18n.getMessage("loading_available_qualities")}</option>`;
+    qualitySelect.replaceChildren(makeOption("", chrome.i18n.getMessage("loading_available_qualities"), { selected: true, disabled: true }));
 
-    chrome.scripting.executeScript({
-        target: { tabId },
-        func: detectAvailableQualities
-    }).then(res => {
-        const list = res?.[0]?.result || [];
+    Promise.all([
+        chrome.tabs.sendMessage(tabId, { type: 'GET_QUALITIES' }, { frameId: 0 }),
+        chrome.storage.local.get('preferredQuality')
+    ]).then(([res, { preferredQuality }]) => {
+        const list = res?.availableQualities || [];
 
         if (!list.length) {
-            qualitySelect.innerHTML = `<option disabled selected>${chrome.i18n.getMessage("no_available_qualities")}</option>`;
+            qualitySelect.replaceChildren(makeOption("", chrome.i18n.getMessage("no_available_qualities"), { selected: true, disabled: true }));
             return;
         }
 
         qualitySelect.dataset.loaded = 'true';
-        qualitySelect.innerHTML = '';
+        qualitySelect.replaceChildren();
 
+        const seen = new Set();
         list.forEach(q => {
-            const opt = document.createElement('option');
-            opt.value = /auto|자동/i.test(q) ? 'Auto' : q;
-            opt.textContent = q;
-
-            if (q === currentQ) opt.selected = true;
-
-            qualitySelect.appendChild(opt);
+            const isAutoItem = /auto|자동/i.test(q);
+            const value = isAutoItem ? 'Auto' : (q.match(/\d{3,4}p/) || [q])[0];
+            if (seen.has(value)) return; // "1080p"와 "1080p Premium" 중복 제거
+            seen.add(value);
+            qualitySelect.appendChild(makeOption(value, q));
         });
 
+        // 저장된 선호 화질이 있으면 그것을, 없으면 현재 재생 화질을 선택해서 보여준다.
+        const initial = [preferredQuality, currentQ].find(v => v && seen.has(v));
+        if (initial) qualitySelect.value = initial;
+    }).catch(() => {
+        qualitySelect.replaceChildren(makeOption("", chrome.i18n.getMessage("detection_error"), { selected: true, disabled: true }));
     });
 }
 
-// 언어별 화질 설정 감지 및 적용
+// 선택한 화질을 선호 화질로 저장(이후 영상에서도 자동 적용)하고 현재 영상에도 바로 적용한다.
 function setQuality(tabId, preferredQuality) {
-    function apply(quality) {
-        const wait = ms => new Promise(r => setTimeout(r, ms));
-
-        (async () => {
-            const settingsBtn = document.querySelector('.ytp-settings-button');
-            if (!settingsBtn) return;
-
-            settingsBtn.click();
-            await wait(100);
-
-            const qMenu = [...document.querySelectorAll('.ytp-menuitem')].find(i =>
-                ["화질","quality","画質","画质","qualité","qualität","kwaliteit","kalidad","kualitas","qualidade","جودة","качество"]
-                .some(k => i.textContent.toLowerCase().includes(k))
-            );
-
-            if (!qMenu) return;
-
-            qMenu.click();
-            await wait(100);
-
-            const target = [...document.querySelectorAll('.ytp-menuitem-label')]
-                .find(l => l.textContent.includes(quality));
-
-            target?.click();
-            settingsBtn.click();
-        })();
-    }
-
-    chrome.scripting.executeScript({
-        target: { tabId },
-        func: apply,
-        args: [preferredQuality]
-    }).finally(() => window.close());
+    chrome.storage.local.set({ preferredQuality })
+        .then(() => chrome.tabs.sendMessage(tabId, { type: 'SET_QUALITY', quality: preferredQuality }, { frameId: 0 }))
+        .catch(() => {})
+        .finally(() => window.close());
 }
 
 // pip 모드
@@ -190,6 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     pipBtn.addEventListener("click", () => {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
             const tab = tabs[0];
+            if (!tab) return;
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
                 func: () => {
@@ -210,6 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     pipStatus.textContent = ok
                         ? chrome.i18n.getMessage("pipmasage")
                         : chrome.i18n.getMessage("pipmagase2");
+            }).catch(() => {
+                if (pipStatus) pipStatus.textContent = chrome.i18n.getMessage("pipmagase2");
             });
         });
     });
