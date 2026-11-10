@@ -43,7 +43,8 @@
     const nextBtn = document.querySelector('#navigation-button-down button');
     if (!video || !nextBtn) return;     
 
-    const progress = (video.currentTime / video.duration) * 100;
+    const hasDuration = Number.isFinite(video.duration) && video.duration > 0;
+    const progress = hasDuration ? (video.currentTime / video.duration) * 100 : 0;
     if (isAdBadge() || progress >= 98) doSkip(nextBtn);
   }
 
