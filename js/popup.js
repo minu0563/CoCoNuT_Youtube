@@ -61,6 +61,14 @@ function getCurrentPlaybackQuality() {
     return match ? match[1] : null;
 }
 
+// content.js 가 아직 주입되지 않은 탭(확장 프로그램을 새로 로드한 직후 등)에서도 동작하도록
+// 먼저 주입한다. content.js 에 중복 실행 방지 가드가 있어 여러 번 불러도 안전하다.
+function sendToTab(tabId, message) {
+    return chrome.scripting
+        .executeScript({ target: { tabId }, files: ['js/content.js'] })
+        .then(() => chrome.tabs.sendMessage(tabId, message, { frameId: 0 }));
+}
+
 function updateCurrentQuality(tabId) {
     chrome.scripting.executeScript({
         target: { tabId },
@@ -103,7 +111,7 @@ function loadAvailableQualities(tabId) {
     qualitySelect.replaceChildren(makeOption("", chrome.i18n.getMessage("loading_available_qualities"), { selected: true, disabled: true }));
 
     Promise.all([
-        chrome.tabs.sendMessage(tabId, { type: 'GET_QUALITIES' }, { frameId: 0 }),
+        sendToTab(tabId, { type: 'GET_QUALITIES' }),
         chrome.storage.local.get('preferredQuality')
     ]).then(([res, { preferredQuality }]) => {
         const list = res?.availableQualities || [];
@@ -136,7 +144,7 @@ function loadAvailableQualities(tabId) {
 // 선택한 화질을 선호 화질로 저장(이후 영상에서도 자동 적용)하고 현재 영상에도 바로 적용한다.
 function setQuality(tabId, preferredQuality) {
     chrome.storage.local.set({ preferredQuality })
-        .then(() => chrome.tabs.sendMessage(tabId, { type: 'SET_QUALITY', quality: preferredQuality }, { frameId: 0 }))
+        .then(() => sendToTab(tabId, { type: 'SET_QUALITY', quality: preferredQuality }))
         .catch(() => {})
         .finally(() => window.close());
 }

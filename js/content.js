@@ -22,7 +22,8 @@
     (el.querySelector(".ytp-menuitem-label")?.textContent || el.textContent || "")
       .replace(/ /g, " ")
       .trim();
-  const isAuto = (label) => /auto|자동/i.test(label);
+  // "Auto", "Auto (720p)", "자동", "자동(720p)" 만 해당. "Autoplay", "자동 재생" 같은 다른 메뉴는 제외.
+  const isAuto = (label) => /^(auto|자동)\s*(\(|$)/i.test(label);
   const isPremium = (label) => /premium|프리미엄/i.test(label);
   const parseHeight = (label) => {
     const m = label.match(/(\d{3,4})p/);
@@ -38,26 +39,22 @@
   // 영상이 지원하는 화질 목록은 설정(톱니) → 화질 메뉴를 실제로 열어야만 얻을 수 있다.
   // 메뉴가 화면에 깜빡이지 않도록 작업 중에는 숨겨 둔다.
 
+  // 유튜브 설정 메뉴의 컨테이너 클래스에 의존하지 않도록 .ytp-menuitem 전체에서 찾는다.
   function findQualityMenuItem() {
-    return [...document.querySelectorAll(".ytp-settings-menu .ytp-menuitem")].find((el) => {
+    return [...document.querySelectorAll(".ytp-menuitem")].find((el) => {
       const text = labelOf(el).toLowerCase();
       return QUALITY_MENU_KEYWORDS.some((k) => text.includes(k));
     });
   }
 
+  // 화질 목록 패널이 실제로 열렸는지(= 해상도 항목이 하나라도 있는지) 확인한 뒤에만 반환한다.
   function getQualityItems() {
-    let items = [...document.querySelectorAll(".ytp-quality-menu .ytp-menuitem")];
-    if (!items.length) {
-      items = [...document.querySelectorAll(".ytp-settings-menu .ytp-menuitem")].filter((el) => {
-        const l = labelOf(el);
-        return parseHeight(l) !== null;
-      });
-    }
-    items = items.filter((el) => {
+    const all = [...document.querySelectorAll(".ytp-menuitem")];
+    if (!all.some((el) => parseHeight(labelOf(el)) !== null)) return null;
+    return all.filter((el) => {
       const l = labelOf(el);
       return isAuto(l) || parseHeight(l) !== null;
     });
-    return items.length ? items : null;
   }
 
   let busy = false;

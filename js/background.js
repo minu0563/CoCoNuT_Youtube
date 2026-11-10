@@ -28,48 +28,17 @@ async function injectIntoOpenTabs() {
 chrome.runtime.onInstalled.addListener(injectIntoOpenTabs);
 
 // ---------- 단축키 ----------
-// 단축키는 유튜브 밖(다른 창)에서도 눌릴 수 있으므로 열려있는 모든 유튜브 탭 중에서 "대상 탭"을 하나 고른다.
-// PiP 창은 브라우저 전체에서 하나만 열 수 있어서, 모든 탭에 동시에 실행하면 어떤 탭이 이길지 알 수 없다.
-//   1순위: 이미 PiP가 켜져 있는 탭 (끄기 / 10초 이동)
-//   2순위: 재생 중인 영상이 있는 탭
-//   3순위: 영상이 있는 탭 중 가장 최근에 사용한 탭
-function probeVideo() {
-  const v = document.querySelector("video.html5-main-video");
-  return {
-    hasVideo: !!v,
-    playing: !!v && !v.paused && !v.ended && v.readyState > 2,
-    pip: !!document.pictureInPictureElement
-  };
-}
-
-async function pickTargetTab() {
-  const tabs = await chrome.tabs.query({ url: YT_URL_PATTERN });
-  const probes = await Promise.all(tabs.map(async (tab) => {
-    try {
-      const [res] = await chrome.scripting.executeScript({ target: { tabId: tab.id }, func: probeVideo });
-      return { tab, ...(res?.result || {}) };
-    } catch (e) {
-      return { tab };
-    }
-  }));
-
-  const recent = (a, b) => (b.tab.lastAccessed || 0) - (a.tab.lastAccessed || 0);
-  const pip = probes.filter(p => p.pip).sort(recent)[0];
-  if (pip) return { tab: pip.tab, pip: true };
-
-  const playing = probes.filter(p => p.playing).sort(recent);
-  const withVideo = probes.filter(p => p.hasVideo).sort(recent);
-  const target = playing[0] || withVideo[0];
-  return target ? { tab: target.tab, pip: false } : null;
-}
-
+// 주의: requestPictureInPicture()는 사용자 제스처가 필요하다. 확장 프로그램 단축키의 제스처는
+// "단축키 이벤트 → 콜백 → executeScript" 로 바로 이어질 때만 페이지까지 전달되므로,
+// 그 사이에 다른 비동기 작업(탭 상태 조회 등)을 끼워 넣으면 PiP 실행이 막힌다.
+// 그래서 단축키 핸들러는 tabs.query 콜백 안에서 곧바로 executeScript 를 호출한다.
 function togglePip() {
   const video = document.querySelector("video.html5-main-video");
   if (!video) return;
   if (document.pictureInPictureElement) {
     document.exitPictureInPicture();
   } else {
-    video.requestPictureInPicture();
+    video.requestPictureInPicture().catch(() => {});
   }
 }
 
@@ -80,23 +49,22 @@ function skipVideo(seconds) {
   video.currentTime = Math.min(Math.max(video.currentTime + seconds, 0), max);
 }
 
-chrome.commands.onCommand.addListener(async (command) => {
-  try {
-    const target = await pickTargetTab();
-    if (!target) return;
-    const tabId = target.tab.id;
+chrome.commands.onCommand.addListener((command) => {
+  chrome.tabs.query({ url: YT_URL_PATTERN }, (tabs) => {
+    if (!tabs || tabs.length === 0) return;
 
-    if (command === "toggle_pip") {
-      await chrome.scripting.executeScript({ target: { tabId }, func: togglePip });
-    } else if (command === "skip_backward" || command === "skip_forward") {
-      if (!target.pip) return; // PiP가 켜진 탭이 없으면 아무것도 하지 않음
-      await chrome.scripting.executeScript({
-        target: { tabId },
-        func: skipVideo,
-        args: [command === "skip_backward" ? -10 : 10]
-      });
-    }
-  } catch (e) {
-    console.warn("[CoCoNuT] command failed:", command, e);
-  }
+    tabs.forEach((tab) => {
+      const run = (func, args) =>
+        chrome.scripting.executeScript({ target: { tabId: tab.id }, func, args })
+          .catch((e) => console.warn("[CoCoNuT] command failed:", command, tab.id, e));
+
+      if (command === "toggle_pip") {
+        run(togglePip);
+      } else if (command === "skip_backward") {
+        run(skipVideo, [-10]);
+      } else if (command === "skip_forward") {
+        run(skipVideo, [10]);
+      }
+    });
+  });
 });
