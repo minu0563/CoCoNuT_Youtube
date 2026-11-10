@@ -132,8 +132,15 @@
 
         const list = entries
           .filter((e) => !isAuto(e.label))
-          .map((e) => ({ ...e, h: parseHeight(e.label) }))
-          .sort((a, b) => b.h - a.h || Number(isPremium(a.label)) - Number(isPremium(b.label)));
+          .map((e, i) => ({
+            ...e,
+            i,
+            h: parseHeight(e.label),
+            // Premium 표시가 라벨 밖(배지 요소)에 있을 수 있으므로 항목 전체에서 찾는다.
+            prem: isPremium(e.el.textContent) || !!e.el.querySelector('[class*="premium" i]')
+          }))
+          // 같은 해상도면 Premium이 아닌 것을 우선, 구분이 안 되면 목록에서 아래쪽(보통 일반 화질)을 택한다.
+          .sort((a, b) => b.h - a.h || Number(a.prem) - Number(b.prem) || b.i - a.i);
 
         target = list.find((e) => e.h <= want) || list[list.length - 1];
       }
