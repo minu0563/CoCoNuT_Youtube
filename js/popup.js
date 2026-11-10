@@ -124,14 +124,21 @@ function loadAvailableQualities(tabId) {
         qualitySelect.dataset.loaded = 'true';
         qualitySelect.replaceChildren();
 
-        const seen = new Set();
+        // 같은 해상도가 "1080p Premium"과 "1080p"로 둘 있으면 일반 화질의 글자를 표시한다.
+        // (목록에서는 Premium이 먼저 나오므로 처음 본 것을 쓰면 Premium으로 보이게 된다.)
+        const entries = new Map();
         list.forEach(q => {
-            const isAutoItem = /auto|자동/i.test(q);
+            const isAutoItem = /^(auto|자동)/i.test(q);
             const value = isAutoItem ? 'Auto' : (q.match(/\d{3,4}p/) || [q])[0];
-            if (seen.has(value)) return; // "1080p"와 "1080p Premium" 중복 제거
-            seen.add(value);
-            qualitySelect.appendChild(makeOption(value, q));
+            const prem = /premium|프리미엄/i.test(q);
+            const prev = entries.get(value);
+            if (!prev || (prev.prem && !prem)) entries.set(value, { q, prem });
         });
+
+        entries.forEach(({ q, prem }, value) => {
+            qualitySelect.appendChild(makeOption(value, prem ? value : q));
+        });
+        const seen = entries;
 
         // 저장된 선호 화질이 있으면 그것을, 없으면 현재 재생 화질을 선택해서 보여준다.
         const initial = [preferredQuality, currentQ].find(v => v && seen.has(v));
