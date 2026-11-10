@@ -59,6 +59,14 @@
 
   let busy = false;
 
+  // 설정 메뉴가 실제로 화면에 열려 있는지. (aria-expanded 속성은 신뢰할 수 없어서 렌더링 상태로 판단)
+  function isMenuOpen() {
+    const m = document.querySelector(".ytp-settings-menu");
+    if (!m) return false;
+    const cs = getComputedStyle(m);
+    return cs.display !== "none" && cs.visibility !== "hidden" && m.getClientRects().length > 0;
+  }
+
   async function withQualityMenu(fn) {
     while (busy) await wait(100);
     busy = true;
@@ -69,26 +77,36 @@
       return null;
     }
 
+    // 작업 중에는 메뉴가 화면에 깜빡이지 않도록 숨긴다.
     const style = document.createElement("style");
     style.textContent = ".ytp-popup.ytp-settings-menu{opacity:0 !important;}";
     document.documentElement.appendChild(style);
 
-    const wasOpen = btn.getAttribute("aria-expanded") === "true";
+    const wasOpen = isMenuOpen();
     try {
-      if (!wasOpen) btn.click();
+      if (!wasOpen) {
+        btn.click();
+        await waitFor(isMenuOpen, 1000);
+      }
 
-      const menuItem = await waitFor(findQualityMenuItem);
-      if (!menuItem) return null;
-      menuItem.click();
-
-      const items = await waitFor(getQualityItems);
+      // 이미 화질 목록 패널이 열려 있으면 그대로 쓰고, 아니면 "화질" 항목을 눌러 연다.
+      let items = getQualityItems();
+      if (!items) {
+        const menuItem = await waitFor(findQualityMenuItem);
+        if (!menuItem) return null;
+        menuItem.click();
+        items = await waitFor(getQualityItems);
+      }
       if (!items) return null;
 
       return fn(items);
     } finally {
-      // 실패하더라도 메뉴가 열린 채로 남지 않게 닫는다.
-      await wait(50);
-      if (!wasOpen && btn.getAttribute("aria-expanded") === "true") btn.click();
+      // 유튜브가 화질 선택 후 메뉴를 스스로 닫을 시간을 준 뒤, 우리가 연 메뉴가 남아 있으면 닫는다.
+      await wait(150);
+      if (!wasOpen && isMenuOpen()) {
+        btn.click();
+        await waitFor(() => !isMenuOpen(), 800);
+      }
       style.remove();
       busy = false;
     }
